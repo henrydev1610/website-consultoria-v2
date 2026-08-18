@@ -1,26 +1,239 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-background-dark: #000000;
+  --color-background-light: #ffffff;
+  --color-accent: #ff3d00;
+  --color-text-primary: #111111;
+  --color-text-light: #ffffff;
+  --color-text-muted: #8f8f8f;
+  --color-text-ghost: #e8e8e8;
+  --color-border-light: #e5e5e5;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--color-background-light);
+  --color-foreground: var(--color-text-primary);
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-ibm-plex-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-background-light);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--color-background-light);
+  color: var(--color-text-primary);
+  font-family: var(--font-archivo), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+figure {
+  margin: 0;
+}
+
+img {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #000;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f2f2f2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  z-index: 70;
+  transform: translateY(-160%);
+  border: 1px solid #000;
+  background: #fff;
+  padding: 0.7rem 1rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.site-container {
+  width: min(100%, 1800px);
+  margin-inline: auto;
+  padding-inline: clamp(16px, 2vw, 48px);
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 32px);
+}
+
+.display-xl,
+.display-lg,
+.manifesto-text,
+.footer-brand {
+  text-wrap: balance;
+}
+
+.display-xl {
+  font-size: clamp(3.4rem, 11vw, 10.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+
+.display-lg {
+  font-size: clamp(2.8rem, 7vw, 6.4rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-weight: 560;
+}
+
+.manifesto-text {
+  max-width: 15ch;
+  font-size: clamp(2rem, 5vw, 4.8rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.manifesto-word {
+  color: var(--color-text-ghost);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 1.5rem;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  white-space: nowrap;
+}
+
+.header-link,
+.footer-link {
+  position: relative;
+  display: inline-flex;
+  width: fit-content;
+  transition: color 0.3s ease;
+}
+
+.header-link::after,
+.footer-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  height: 1px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.header-link:hover::after,
+.header-link:focus-visible::after,
+.footer-link:hover::after,
+.footer-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.footer-brand {
+  font-size: clamp(4.4rem, 13vw, 13rem);
+  line-height: 0.82;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .grid-layout {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid-layout {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }

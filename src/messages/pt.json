@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "siteTitle": "Northline Dossier",
+    "siteDescription": "Preparação e organização documental para imigração com processo premium e multilíngue.",
+    "home": {
+      "title": "Northline Dossier | Documentos de Imigração Preparados com Precisão",
+      "description": "Um serviço premium e multilíngue para organizar, revisar e preparar documentos de imigração antes do avanço do seu processo."
+    },
+    "about": {
+      "title": "Sobre | Northline Dossier",
+      "description": "Conheça a forma como a Northline Dossier transforma burocracia migratória em um processo mais claro e confiável."
+    },
+    "services": {
+      "title": "Serviços | Northline Dossier",
+      "description": "Preparação documental, revisão de aplicação, coordenação de traduções e checklists estruturados para imigração."
+    },
+    "process": {
+      "title": "Como Funciona | Northline Dossier",
+      "description": "Entenda o fluxo de quatro etapas usado para preparar sua documentação com mais clareza e organização."
+    },
+    "contact": {
+      "title": "Contato | Northline Dossier",
+      "description": "Inicie seu processo documental com uma equipe multilíngue focada em organização e precisão."
+    }
+  },
+  "common": {
+    "skipToContent": "Pular para o conteúdo",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "menuLabel": "Menu +",
+    "startProcess": "Iniciar processo",
+    "startProcessLong": "Iniciar meu processo",
+    "languageLabel": "Idioma",
+    "viewPage": "Ver página",
+    "notAvailableYet": "Esta página está preparada para a próxima etapa."
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "Sobre",
+    "services": "Serviços",
+    "process": "Como Funciona",
+    "contact": "Contato"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Preparação documental internacional",
+      "title": ["Seu próximo", "destino", "começa organizado"],
+      "description": "Preparamos e organizamos sua documentação para que processos de visto e imigração sejam mais claros, seguros e fáceis de conduzir.",
+      "cta": "Iniciar meu processo",
+      "imageAlt": "Viajantes caminhando por um grande terminal internacional"
+    },
+    "trustMarquee": {
+      "items": [
+        "VISTOS",
+        "DOCUMENTAÇÃO",
+        "ESTUDO",
+        "TRABALHO",
+        "NEGÓCIOS",
+        "FAMÍLIA",
+        "MOBILIDADE GLOBAL",
+        "RELOCATION"
+      ]
+    },
+    "about": {
+      "eyebrow": "Quem somos",
+      "title": "Preparar seus documentos não deveria ser mais complicado do que a própria jornada.",
+      "body": "A Northline Dossier foi criada para transformar papelada em estrutura. Revisamos exigências, organizamos arquivos e definimos uma sequência mais clara antes do avanço da sua aplicação.",
+      "secondary": "O objetivo não é ruído. É um dossiê confiável, um processo mais limpo e menos erros evitáveis ao longo do caminho.",
+      "primaryImageAlt": "Retrato editorial de uma viajante em um espaço público contemporâneo",
+      "secondaryImageAlt": "Corredor arquitetônico de aeroporto com sensação de deslocamento",
+      "frameTitle": "Preparação",
+      "frameBody": "Revisamos, organizamos e preparamos cada documento necessário antes que sua aplicação avance."
+    },
+    "manifesto": {
+      "eyebrow": "Nossa abordagem",
+      "text": "Processos de imigração podem ser complexos. Sua documentação não precisa ser. Transformamos exigências, formulários e comprovantes em um caminho mais claro para seguir em frente."
+    },
+    "services": {
+      "eyebrow": "Nossos serviços",
+      "title": "Tudo organizado antes que sua aplicação comece.",
+      "items": [
+        {
+          "id": "preparation",
+          "number": "01",
+          "title": "Preparação documental",
+          "description": "Estruturação dos arquivos, padronização, revisão de completude e preparação antes do envio."
+        },
+        {
+          "id": "review",
+          "number": "02",
+          "title": "Revisão da aplicação",
+          "description": "Uma leitura detalhada de formulários e documentos de apoio antes da próxima etapa."
+        },
+        {
+          "id": "translation",
+          "number": "03",
+          "title": "Coordenação de traduções",
+          "description": "Suporte para alinhar materiais traduzidos ao formato e à sequência que seu processo exige."
+        },
+        {
+          "id": "checklist",
+          "number": "04",
+          "title": "Checklist documental de imigração",
+          "description": "Um roteiro estruturado do que é necessário, do que está pendente e do que vem em seguida."
+        }
+      ]
+    },
+    "process": {
+      "eyebrow": "Como funciona",
+      "title": "Um processo desenhado para trazer clareza desde o primeiro arquivo.",
+      "items": [
+        {
+          "number": "01",
+          "title": "Conte seu objetivo",
+          "description": "Começamos pelo seu destino, prazo e contexto documental."
+        },
+        {
+          "number": "02",
+          "title": "Envie seus documentos",
+          "description": "Você compartilha o que já possui para que o estágio atual seja mapeado com clareza."
+        },
+        {
+          "number": "03",
+          "title": "Nós organizamos e revisamos",
+          "description": "Nossa equipe estrutura o dossiê, verifica consistência e aponta itens faltantes ou pouco claros."
+        },
+        {
+          "number": "04",
+          "title": "Receba seu arquivo preparado",
+          "description": "Você segue adiante com uma documentação mais limpa, organizada e pronta para avançar."
+        }
+      ]
+    },
+    "differentials": {
+      "eyebrow": "Por que parece diferente",
+      "title": ["Menos incerteza.", "Mais clareza.", "Cada documento em seu lugar."],
+      "points": [
+        "Processo claro",
+        "Arquivos organizados",
+        "Atendimento multilíngue",
+        "Revisão humana"
+      ]
+    },
+    "international": {
+      "eyebrow": "Mobilidade internacional",
+      "title": "Para onde quer que você vá, a preparação vem primeiro.",
+      "body": "De planos de estudo a mudanças em família e viagens de negócios, o primeiro passo mais forte é um arquivo completo, consistente e pronto para seguir.",
+      "imageAlt": "Asa de avião acima das nuvens durante um voo internacional"
+    },
+    "finalCta": {
+      "eyebrow": "Pronto quando você estiver",
+      "title": ["Pronto para", "seu próximo passo?"],
+      "body": "Nós preparamos a documentação por trás da decisão.",
+      "cta": "Iniciar processo"
+    }
+  },
+  "footer": {
+    "navigation": "Navegação",
+    "languages": "Idiomas",
+    "contact": "Contato",
+    "legal": "Legal",
+    "privacy": "Privacidade",
+    "terms": "Termos",
+    "tagline": "Documentação organizada para movimentos internacionais."
+  },
+  "pages": {
+    "about": {
+      "eyebrow": "Sobre",
+      "title": "Um processo mais tranquilo começa com documentos melhor preparados.",
+      "body": "Esta página está pronta para receber a história completa da empresa, credenciais da equipe e detalhes de posicionamento na próxima etapa."
+    },
+    "services": {
+      "eyebrow": "Serviços",
+      "title": "Suporte estruturado antes do avanço para a etapa formal da aplicação.",
+      "body": "Esta rota está preparada para o detalhamento completo dos serviços, FAQs e conteúdos de apoio."
+    },
+    "process": {
+      "eyebrow": "Como funciona",
+      "title": "Um fluxo pensado para reduzir incertezas antes do envio.",
+      "body": "Esta página está preparada para a narrativa completa do processo, materiais exigidos e expectativas de prazo."
+    },
+    "contact": {
+      "eyebrow": "Contato",
+      "title": "Inicie a conversa com seu destino já em perspectiva.",
+      "body": "Esta página está preparada para a experiência completa de contato, formulário de triagem e dados regionais."
+    }
+  }
+}

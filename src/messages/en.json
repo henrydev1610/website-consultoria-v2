@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "siteTitle": "Northline Dossier",
+    "siteDescription": "Preparation and organization of immigration documents with a premium, multilingual process.",
+    "home": {
+      "title": "Northline Dossier | Immigration Documents Prepared with Precision",
+      "description": "A premium multilingual service for organizing, reviewing, and preparing immigration documents before your process moves forward."
+    },
+    "about": {
+      "title": "About | Northline Dossier",
+      "description": "Learn how Northline Dossier organizes complex immigration paperwork into a clear and reliable process."
+    },
+    "services": {
+      "title": "Services | Northline Dossier",
+      "description": "Document preparation, application review, translation coordination, and structured immigration checklists."
+    },
+    "process": {
+      "title": "How It Works | Northline Dossier",
+      "description": "Understand the four-step workflow used to prepare your immigration documentation with more clarity and structure."
+    },
+    "contact": {
+      "title": "Contact | Northline Dossier",
+      "description": "Start your immigration documentation process with a multilingual team focused on organization and precision."
+    }
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menuLabel": "Menu +",
+    "startProcess": "Start your process",
+    "startProcessLong": "Start my process",
+    "languageLabel": "Language",
+    "viewPage": "View page",
+    "notAvailableYet": "This page is prepared for the next stage."
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "process": "How It Works",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "International document preparation",
+      "title": ["Your next", "destination", "starts organized"],
+      "description": "We prepare and organize your documentation so visa and immigration processes feel clearer, safer, and easier to manage.",
+      "cta": "Start my process",
+      "imageAlt": "Travelers walking through a large international terminal"
+    },
+    "trustMarquee": {
+      "items": [
+        "VISAS",
+        "DOCUMENTATION",
+        "STUDY",
+        "WORK",
+        "BUSINESS",
+        "FAMILY",
+        "GLOBAL MOBILITY",
+        "RELOCATION"
+      ]
+    },
+    "about": {
+      "eyebrow": "Who we are",
+      "title": "Preparing your documents should not feel more complicated than the journey itself.",
+      "body": "Northline Dossier was created to turn paperwork into structure. We review requirements, organize files, and build a clearer sequence before your application moves forward.",
+      "secondary": "The goal is not noise. It is a confident file, a cleaner process, and fewer avoidable mistakes along the way.",
+      "primaryImageAlt": "Editorial portrait of a traveler in a contemporary public space",
+      "secondaryImageAlt": "Architectural airport corridor with directional movement",
+      "frameTitle": "Preparation",
+      "frameBody": "We review, organize, and prepare every required document before your application advances."
+    },
+    "manifesto": {
+      "eyebrow": "Our approach",
+      "text": "Immigration processes can be complex. Your documentation does not have to be. We transform requirements, forms, and supporting paperwork into a clear path forward."
+    },
+    "services": {
+      "eyebrow": "Our services",
+      "title": "Everything organized before your application begins.",
+      "items": [
+        {
+          "id": "preparation",
+          "number": "01",
+          "title": "Document preparation",
+          "description": "File structure, naming, completeness review, and preparation before submission."
+        },
+        {
+          "id": "review",
+          "number": "02",
+          "title": "Application review",
+          "description": "A detailed pass over forms and supporting materials before you move to the next step."
+        },
+        {
+          "id": "translation",
+          "number": "03",
+          "title": "Translation coordination",
+          "description": "Support for aligning translated materials with the format and sequence your process requires."
+        },
+        {
+          "id": "checklist",
+          "number": "04",
+          "title": "Immigration document checklist",
+          "description": "A structured roadmap of what is needed, what is pending, and what comes next."
+        }
+      ]
+    },
+    "process": {
+      "eyebrow": "How it works",
+      "title": "A process designed for clarity from the first file onward.",
+      "items": [
+        {
+          "number": "01",
+          "title": "Tell us your goal",
+          "description": "We start with your destination, timeline, and documentation scenario."
+        },
+        {
+          "number": "02",
+          "title": "Send your documents",
+          "description": "You share the materials already on hand so we can map the current stage clearly."
+        },
+        {
+          "number": "03",
+          "title": "We organize and review",
+          "description": "Our team structures the file, checks consistency, and flags missing or unclear items."
+        },
+        {
+          "number": "04",
+          "title": "Receive your prepared file",
+          "description": "You move forward with a cleaner, better-organized set of documents."
+        }
+      ]
+    },
+    "differentials": {
+      "eyebrow": "Why it feels different",
+      "title": ["Less uncertainty.", "More clarity.", "Every document in its place."],
+      "points": [
+        "Clear process",
+        "Organized files",
+        "Multilingual support",
+        "Human review"
+      ]
+    },
+    "international": {
+      "eyebrow": "International mobility",
+      "title": "Wherever you are headed, preparation comes first.",
+      "body": "From study plans to family moves and business travel, the strongest first step is a file that is complete, consistent, and ready to move.",
+      "imageAlt": "Airplane wing above clouds during an international flight"
+    },
+    "finalCta": {
+      "eyebrow": "Ready when you are",
+      "title": ["Ready for", "your next move?"],
+      "body": "Let us prepare the documents behind the decision.",
+      "cta": "Start your process"
+    }
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "languages": "Languages",
+    "contact": "Contact",
+    "legal": "Legal",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "tagline": "Documentation, organized for international movement."
+  },
+  "pages": {
+    "about": {
+      "eyebrow": "About",
+      "title": "A calmer process begins with better-prepared documentation.",
+      "body": "This page is ready for the full company story, team credentials, and positioning details in the next phase."
+    },
+    "services": {
+      "eyebrow": "Services",
+      "title": "Structured support before you move into the formal application stage.",
+      "body": "This route is prepared for the detailed service breakdown, FAQs, and supporting content."
+    },
+    "process": {
+      "eyebrow": "How it works",
+      "title": "A workflow designed to reduce uncertainty before submission.",
+      "body": "This page is prepared for the complete process narrative, required materials, and timing expectations."
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "Start the conversation with your destination already in view.",
+      "body": "This page is prepared for the full contact experience, intake form, and regional contact details."
+    }
+  }
+}

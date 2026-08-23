@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { cn } from "@/lib/utils";
@@ -16,6 +23,11 @@ const DURATION_MS = 390;
 interface ScrambleTextProps {
   text: string;
   className?: string;
+}
+
+export interface ScrambleTextHandle {
+  start: () => void;
+  stop: () => void;
 }
 
 function isScramblableCharacter(char: string) {
@@ -68,7 +80,8 @@ function getScrambledValue(chars: string[], elapsed: number) {
     .join("");
 }
 
-export function ScrambleText({ text, className }: ScrambleTextProps) {
+export const ScrambleText = forwardRef<ScrambleTextHandle, ScrambleTextProps>(
+  function ScrambleText({ text, className }, ref) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [displayText, setDisplayText] = useState(text);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -132,7 +145,7 @@ export function ScrambleText({ text, className }: ScrambleTextProps) {
     setIsAnimating(false);
   }
 
-  function handleMouseEnter() {
+  function startAnimation() {
     if (prefersReducedMotion || typeof window === "undefined") {
       stopAnimation();
       return;
@@ -168,6 +181,18 @@ export function ScrambleText({ text, className }: ScrambleTextProps) {
     };
 
     frameRef.current = requestAnimationFrame(tick);
+  }
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      start: startAnimation,
+      stop: stopAnimation,
+    }),
+  );
+
+  function handleMouseEnter() {
+    startAnimation();
   }
 
   function handleMouseLeave() {
@@ -230,4 +255,7 @@ export function ScrambleText({ text, className }: ScrambleTextProps) {
       </span>
     </span>
   );
-}
+  },
+);
+
+ScrambleText.displayName = "ScrambleText";

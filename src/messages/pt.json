@@ -63,11 +63,18 @@
     },
     "about": {
       "eyebrow": "Quem somos",
+      "headlineLines": [
+        "Organizamos o caminho",
+        "antes que ele se torne",
+        "complicado."
+      ],
       "title": "Preparar seus documentos não deveria ser mais complicado do que a própria jornada.",
       "body": "A Onio Global Solutions foi criada para transformar papelada em estrutura. Revisamos exigências, organizamos arquivos e definimos uma sequência mais clara antes do avanço da sua aplicação.",
       "secondary": "O objetivo não é ruído. É um dossiê confiável, um processo mais limpo e menos erros evitáveis ao longo do caminho.",
+      "backgroundLines": ["UM CAMINHO", "MAIS CLARO"],
       "primaryImageAlt": "Retrato editorial de uma viajante em um espaço público contemporâneo",
       "secondaryImageAlt": "Corredor arquitetônico de aeroporto com sensação de deslocamento",
+      "tertiaryImageAlt": "Documentos organizados sobre uma mesa de trabalho clara",
       "frameTitle": "Preparação",
       "frameBody": "Revisamos, organizamos e preparamos cada documento necessário antes que sua aplicação avance."
     },

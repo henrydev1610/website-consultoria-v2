@@ -164,7 +164,7 @@ export function Hero({
             isVideoReady && !prefersReducedMotion ? "opacity-100" : "opacity-0",
           )}
         >
-          <source src="/video/video-aviao.mp4" type="video/mp4" />
+          <source src="/video/video1.mp4" type="video/mp4" />
         </video>
       </div>
       <div

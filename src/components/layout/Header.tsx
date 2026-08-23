@@ -29,6 +29,7 @@ export function Header({ locale, messages }: HeaderProps) {
   const isHomePage = pathname === `/${locale}`;
   const theme = useHeaderTheme(isHomePage);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isHeroHeader = theme === "light" && !isMenuOpen;
 
   return (
     <>
@@ -36,7 +37,7 @@ export function Header({ locale, messages }: HeaderProps) {
         data-header-root
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-          theme === "light" && !isMenuOpen
+          isHeroHeader
             ? "bg-transparent text-white"
             : "border-b border-black/10 bg-white/94 text-black backdrop-blur-md",
         )}
@@ -65,9 +66,19 @@ export function Header({ locale, messages }: HeaderProps) {
             <LocaleSwitcher
               locale={locale}
               label={messages.common.languageLabel}
-              inverted={theme === "light" && !isMenuOpen}
+              inverted={isHeroHeader}
             />
-            <Button href={siteConfig.ctaUrl}>
+            <Button
+              href={siteConfig.ctaUrl}
+              wrapperClassName="header-cta"
+              fillClassName="header-cta-fill"
+              scrambleText={messages.common.startProcess}
+              className={cn(
+                "header-cta-shell",
+                isHeroHeader &&
+                  "border-white bg-transparent text-white",
+              )}
+            >
               {messages.common.startProcess}
             </Button>
           </div>

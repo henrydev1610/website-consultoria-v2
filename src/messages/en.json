@@ -63,11 +63,18 @@
     },
     "about": {
       "eyebrow": "Who we are",
+      "headlineLines": [
+        "We organize the path",
+        "before it becomes",
+        "complicated."
+      ],
       "title": "Preparing your documents should not feel more complicated than the journey itself.",
       "body": "Onio Global Solutions was created to turn paperwork into structure. We review requirements, organize files, and build a clearer sequence before your application moves forward.",
       "secondary": "The goal is not noise. It is a confident file, a cleaner process, and fewer avoidable mistakes along the way.",
+      "backgroundLines": ["A CLEARER", "WAY FORWARD"],
       "primaryImageAlt": "Editorial portrait of a traveler in a contemporary public space",
       "secondaryImageAlt": "Architectural airport corridor with directional movement",
+      "tertiaryImageAlt": "Organized immigration paperwork on a clean desk",
       "frameTitle": "Preparation",
       "frameBody": "We review, organize, and prepare every required document before your application advances."
     },

@@ -42,3 +42,15 @@ export const homeImages: Record<string, ImageAsset> = {
     height: 1200,
   },
 };
+
+export const aboutEditorialImages = {
+  leftFeature: homeImages.hero,
+  topPortrait: homeImages.aboutPrimary,
+  documentDetail: homeImages.servicesChecklist,
+  travelerDetail: homeImages.aboutPrimary,
+  flightDetail: homeImages.international,
+  preparationCard: homeImages.servicesPrimary,
+  reviewCard: homeImages.servicesReview,
+  translationCard: homeImages.servicesTranslation,
+  checklistCard: homeImages.servicesChecklist,
+} satisfies Record<string, ImageAsset>;

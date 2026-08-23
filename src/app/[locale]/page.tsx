@@ -1,11 +1,10 @@
 import { notFound } from "next/navigation";
 
-import { AboutIntro } from "@/components/home/AboutIntro";
+import { AboutSection } from "@/components/home/AboutSection";
 import { Differentials } from "@/components/home/Differentials";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { Hero } from "@/components/home/Hero";
 import { International } from "@/components/home/International";
-import { Manifesto } from "@/components/home/Manifesto";
 import { Process } from "@/components/home/Process";
 import { Services } from "@/components/home/Services";
 import { TrustMarquee } from "@/components/home/TrustMarquee";
@@ -38,9 +37,8 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
   return (
     <>
       <Hero {...messages.home.hero} />
+      <AboutSection locale={locale} messages={messages} />
       <TrustMarquee items={messages.home.trustMarquee.items} />
-      <AboutIntro {...messages.home.about} />
-      <Manifesto {...messages.home.manifesto} />
       <Services
         eyebrow={messages.home.services.eyebrow}
         title={messages.home.services.title}

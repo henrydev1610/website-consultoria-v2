@@ -63,11 +63,18 @@
     },
     "about": {
       "eyebrow": "Quiénes somos",
+      "headlineLines": [
+        "Organizamos el camino",
+        "antes de que se vuelva",
+        "complejo."
+      ],
       "title": "Preparar tus documentos no debería sentirse más complicado que el propio viaje.",
       "body": "Onio Global Solutions fue creada para convertir papeleo en estructura. Revisamos requisitos, organizamos archivos y construimos una secuencia más clara antes de que tu solicitud avance.",
       "secondary": "El objetivo no es ruido. Es un expediente confiable, un proceso más limpio y menos errores evitables en el camino.",
+      "backgroundLines": ["UN CAMINO", "MÁS CLARO"],
       "primaryImageAlt": "Retrato editorial de una viajera en un espacio público contemporáneo",
       "secondaryImageAlt": "Corredor arquitectónico de aeropuerto con sensación de movimiento",
+      "tertiaryImageAlt": "Documentos de inmigración organizados sobre un escritorio claro",
       "frameTitle": "Preparación",
       "frameBody": "Revisamos, organizamos y preparamos cada documento necesario antes de que tu solicitud avance."
     },

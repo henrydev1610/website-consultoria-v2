@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { headerBrand } from "@/data/brand";
 import { siteConfig } from "@/data/site";
 import { getLocalizedPath } from "@/lib/i18n";
 import type { Locale, Messages, RouteKey } from "@/types";
@@ -32,7 +33,7 @@ export function createPageMetadata(
       title: pageMeta.title,
       description: pageMeta.description,
       url: localizedUrl.toString(),
-      siteName: siteConfig.name,
+      siteName: headerBrand.name,
       locale,
       type: "website",
     },

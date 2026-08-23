@@ -5,11 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { navigationItems } from "@/data/navigation";
+import { siteConfig } from "@/data/site";
 import { getLocalizedPath } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import type { Locale, Messages } from "@/types";
 
 import { Button } from "../ui/Button";
+import { ScrambleText } from "../ui/ScrambleText";
 import { BrandMark } from "./BrandMark";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { MobileMenu } from "./MobileMenu";
@@ -41,7 +43,7 @@ export function Header({ locale, messages }: HeaderProps) {
       >
         <Container className="flex items-center gap-6 py-4 md:py-5">
           <div className="flex flex-1 items-center">
-            <BrandMark locale={locale} />
+            <BrandMark locale={locale} branding="header" />
           </div>
 
           <nav
@@ -50,11 +52,11 @@ export function Header({ locale, messages }: HeaderProps) {
           >
             {navigationItems.map((item) => (
               <Link
-                key={item.key}
+                key={`${item.key}-${messages.navigation[item.key]}`}
                 href={getLocalizedPath(locale, item.key)}
                 className="header-link"
               >
-                {messages.navigation[item.key]}
+                <ScrambleText text={messages.navigation[item.key]} />
               </Link>
             ))}
           </nav>
@@ -65,7 +67,7 @@ export function Header({ locale, messages }: HeaderProps) {
               label={messages.common.languageLabel}
               inverted={theme === "light" && !isMenuOpen}
             />
-            <Button href="mailto:hello@northlinedossier.com?subject=Start%20My%20Process">
+            <Button href={siteConfig.ctaUrl}>
               {messages.common.startProcess}
             </Button>
           </div>

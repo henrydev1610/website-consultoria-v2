@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import { homeImages } from "@/data/images";
@@ -30,6 +30,7 @@ export function Hero({
   imageAlt,
 }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
@@ -136,7 +137,10 @@ export function Hero({
       className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-black text-white"
     >
       <div id="hero-sentinel" className="absolute inset-x-0 top-0 h-24" />
-      <div className="absolute inset-0">
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        data-hero-image
+      >
         <Image
           src={homeImages.hero.src}
           alt={imageAlt}
@@ -144,17 +148,36 @@ export function Hero({
           priority
           sizes="100vw"
           className="object-cover"
-          data-hero-image
         />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={homeImages.hero.src}
+          onCanPlay={() => setIsVideoReady(true)}
+          onLoadedData={() => setIsVideoReady(true)}
+          aria-hidden="true"
+          className={cn(
+            "absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-700 ease-out md:object-center",
+            isVideoReady && !prefersReducedMotion ? "opacity-100" : "opacity-0",
+          )}
+        >
+          <source src="/video/video-aviao.mp4" type="video/mp4" />
+        </video>
       </div>
       <div
         data-hero-overlay
-        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.68)_55%,rgba(0,0,0,0.9))]"
-      />
+        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(0,0,0,0.2)_0%,rgba(0,0,0,0.23)_24%,rgba(0,0,0,0.34)_58%,rgba(0,0,0,0.74)_100%),linear-gradient(90deg,rgba(0,0,0,0.34)_0%,rgba(0,0,0,0.16)_55%,rgba(0,0,0,0.24)_100%)]"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_62%,rgba(0,0,0,0.34)_0%,rgba(0,0,0,0.22)_24%,rgba(0,0,0,0.1)_42%,rgba(0,0,0,0)_64%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_86%_54%,rgba(0,0,0,0.16)_0%,rgba(0,0,0,0.08)_18%,rgba(0,0,0,0)_34%)]" />
+      </div>
 
-      <Container className="relative z-10 w-full pb-10 pt-36 md:pb-14 xl:pb-18">
-        <div className="grid-layout items-end gap-y-10">
-          <div className="col-span-4 space-y-6 md:col-span-6 xl:col-span-7">
+      <Container className="hero-shell relative z-[2] mb-[100px] w-full pb-11 pt-34 md:pb-14 xl:pb-18 xl:pt-35">
+        <div className="hero-content-grid grid-layout items-end gap-y-10">
+          <div className="hero-heading-group col-span-4 grid gap-4 md:col-span-6 md:gap-10 xl:col-span-7">
             <Eyebrow
               className="text-white/62"
               data-hero-eyebrow
@@ -163,16 +186,16 @@ export function Hero({
             </Eyebrow>
             <h1
               data-hero-title
-              className={cn("display-xl max-w-[9ch] text-white")}
+              className={cn("display-xl z-50] hero-title text-white")}
             >
               <RevealText lines={title} />
             </h1>
           </div>
 
-          <div className="col-span-4 grid gap-6 md:col-span-7 md:col-start-2 xl:col-span-3 xl:col-start-10">
+          <div className="hero-detail-group col-span-4 grid gap-6 md:col-span-7 md:col-start-2 xl:col-span-3 xl:col-start-10">
             <p
               data-hero-copy
-              className="max-w-[29ch] text-[1rem] leading-relaxed text-white/78 md:text-[1.05rem]"
+              className="hero-description max-w-[29ch] text-[1rem] leading-relaxed text-white/78 md:text-[1.05rem]"
             >
               {description}
             </p>

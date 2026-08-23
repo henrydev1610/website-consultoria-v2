@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import "@/app/globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { headerBrand } from "@/data/brand";
 import { siteConfig } from "@/data/site";
 import { getMessages, isLocale } from "@/lib/i18n";
 import { locales } from "@/types";
@@ -25,8 +27,8 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    default: headerBrand.name,
+    template: `%s | ${headerBrand.name}`,
   },
   description: siteConfig.description,
 };
@@ -54,14 +56,16 @@ export default async function LocaleLayout(props: LayoutProps<"/[locale]">) {
       className={`${archivo.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-[var(--color-background-light)] text-[var(--color-text-primary)]">
-        <a href="#content" className="skip-link">
-          {messages.common.skipToContent}
-        </a>
-        <Header locale={locale} messages={messages} />
-        <main id="content" className="overflow-x-clip">
-          {children}
-        </main>
-        <Footer locale={locale} messages={messages} />
+        <SmoothScrollProvider>
+          <a href="#content" className="skip-link">
+            {messages.common.skipToContent}
+          </a>
+          <Header locale={locale} messages={messages} />
+          <main id="content" className="overflow-x-clip">
+            {children}
+          </main>
+          <Footer locale={locale} messages={messages} />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

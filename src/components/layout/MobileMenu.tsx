@@ -175,6 +175,7 @@ export function MobileMenu({
       ref={panelRef}
       id={panelId}
       aria-hidden={!isOpen}
+      data-lenis-prevent
       className={cn(
         "fixed inset-0 z-40 bg-black/96 text-white lg:hidden",
         !isOpen && "pointer-events-none",

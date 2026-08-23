@@ -1,7 +1,7 @@
 import type { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
-  name: "Northline Dossier",
+  name: "Onio Global Solutions",
   description:
     "Premium immigration document preparation with a precise, multilingual, and organized process.",
   email: "hello@northlinedossier.com",

@@ -28,6 +28,31 @@ html {
   background: var(--color-background-light);
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis body {
+  scroll-behavior: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch],
+.lenis [data-lenis-prevent-vertical],
+.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 body {
   margin: 0;
   background: var(--color-background-light);
@@ -129,6 +154,12 @@ select {
   font-weight: 600;
 }
 
+.hero-title {
+  max-width: 9ch;
+  font-size: clamp(3.3rem, 9.8vw, 9.55rem);
+  line-height: 0.86;
+}
+
 .display-lg {
   font-size: clamp(2.8rem, 7vw, 6.4rem);
   line-height: 0.9;
@@ -210,6 +241,50 @@ select {
 @media (min-width: 1280px) {
   .grid-layout {
     grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+@media (max-height: 900px) and (min-width: 1024px) {
+  .hero-title {
+    font-size: clamp(3.15rem, 8.9vw, 8.95rem);
+    line-height: 0.85;
+  }
+}
+
+@media (max-height: 780px) and (min-width: 1024px) {
+  .hero-title {
+    font-size: clamp(3rem, 8.1vw, 8.3rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-shell {
+    padding-inline: clamp(20px, 5vw, 28px);
+    padding-bottom: clamp(2.5rem, 8vw, 3.25rem);
+  }
+
+  .hero-content-grid {
+    row-gap: clamp(2.9rem, 9vw, 3.4rem);
+  }
+
+  .hero-heading-group {
+    display: grid;
+    row-gap: clamp(0.85rem, 3vw, 1rem);
+    padding-bottom: 0.35rem;
+  }
+
+  .hero-detail-group {
+    row-gap: clamp(1.75rem, 5vw, 2rem);
+    padding-top: 0.4rem;
+  }
+
+  .hero-title {
+    line-height: 0.9;
+  }
+
+  .hero-description {
+    max-width: 30ch;
+    line-height: 1.58;
   }
 }
 

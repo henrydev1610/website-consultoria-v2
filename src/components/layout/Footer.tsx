@@ -1,11 +1,13 @@
 import Link from "next/link";
 
+import { footerBrandLines } from "@/data/brand";
 import { navigationItems } from "@/data/navigation";
 import { siteConfig } from "@/data/site";
 import { getLocalizedPath } from "@/lib/i18n";
 import type { Locale, Messages } from "@/types";
 
 import { Button } from "../ui/Button";
+import { ScrambleText } from "../ui/ScrambleText";
 import { BrandMark } from "./BrandMark";
 import { Container } from "./Container";
 import { LocaleSwitcher } from "./LocaleSwitcher";
@@ -21,7 +23,7 @@ export function Footer({ locale, messages }: FooterProps) {
       <Container className="space-y-16">
         <div className="grid gap-12 border-t border-white/10 pt-10 md:grid-cols-2 xl:grid-cols-[1.4fr_0.8fr_0.8fr_0.9fr]">
           <div className="space-y-5">
-            <BrandMark locale={locale} />
+            <BrandMark locale={locale} branding="header" />
             <p className="max-w-[32ch] text-base leading-relaxed text-white/70">
               {messages.footer.tagline}
             </p>
@@ -38,7 +40,7 @@ export function Footer({ locale, messages }: FooterProps) {
               {navigationItems.map((item) => (
                 <li key={item.key}>
                   <Link href={getLocalizedPath(locale, item.key)} className="footer-link">
-                    {messages.navigation[item.key]}
+                    <ScrambleText text={messages.navigation[item.key]} />
                   </Link>
                 </li>
               ))}
@@ -82,7 +84,13 @@ export function Footer({ locale, messages }: FooterProps) {
         </div>
 
         <div className="pointer-events-none overflow-hidden border-t border-white/10 pt-6">
-          <p className="footer-brand text-white/10">{siteConfig.name}</p>
+          <p className="footer-brand text-white/10">
+            {footerBrandLines.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </p>
         </div>
       </Container>
     </footer>

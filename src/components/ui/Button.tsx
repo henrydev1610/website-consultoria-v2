@@ -57,7 +57,7 @@ function ButtonInner({
       <span className="relative z-[1] inline-flex items-center gap-5">
         <span>
           {scrambleText ? (
-            <ScrambleText ref={scrambleRef} text={scrambleText} />
+            <ScrambleText ref={scrambleRef} text={scrambleText} triggerMode="external" />
           ) : (
             children
           )}

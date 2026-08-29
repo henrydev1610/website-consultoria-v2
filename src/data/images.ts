@@ -37,7 +37,7 @@ export const homeImages: Record<string, ImageAsset> = {
     height: 1600,
   },
   international: {
-    src: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=80",
+    src: "https://images.unsplash.com/photo-1515861209048-dae6a1e1ed56?auto=format&fit=crop&w=1800&q=80",
     width: 1800,
     height: 1200,
   },
@@ -46,7 +46,10 @@ export const homeImages: Record<string, ImageAsset> = {
 export const aboutEditorialImages = {
   leftFeature: homeImages.hero,
   topPortrait: homeImages.aboutPrimary,
+  corridorDetail: homeImages.aboutSecondary,
   documentDetail: homeImages.servicesChecklist,
+  consultingDetail: homeImages.servicesReview,
+  passportDetail: homeImages.servicesPrimary,
   travelerDetail: homeImages.aboutPrimary,
   flightDetail: homeImages.international,
   preparationCard: homeImages.servicesPrimary,

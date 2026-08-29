@@ -31,6 +31,7 @@
     "startProcess": "Iniciar proceso",
     "startProcessLong": "Iniciar mi proceso",
     "languageLabel": "Idioma",
+    "whatsappLabel": "Hablar por WhatsApp",
     "viewPage": "Ver página",
     "notAvailableYet": "Esta página está preparada para la siguiente etapa."
   },
@@ -63,20 +64,20 @@
     },
     "about": {
       "eyebrow": "Quiénes somos",
+      "ctaLabel": "Quiénes somos",
       "headlineLines": [
-        "Organizamos el camino",
-        "antes de que se vuelva",
-        "complejo."
+        "Hacemos más claros los caminos complejos",
+        "desde el primer paso."
       ],
-      "title": "Preparar tus documentos no debería sentirse más complicado que el propio viaje.",
-      "body": "Onio Global Solutions fue creada para convertir papeleo en estructura. Revisamos requisitos, organizamos archivos y construimos una secuencia más clara antes de que tu solicitud avance.",
-      "secondary": "El objetivo no es ruido. Es un expediente confiable, un proceso más limpio y menos errores evitables en el camino.",
+      "title": "Claridad, contexto y acompañamiento cercano para convertir decisiones importantes en un proceso organizado.",
+      "body": "La inmigración implica documentos, decisiones y momentos importantes. Nuestro trabajo es organizar todo eso con claridad, estrategia y acompañamiento cercano, para que sepas exactamente en qué etapa estás y cuál es el siguiente paso.",
+      "secondary": "Desde la preparación documental hasta la revisión final, cada etapa se trabaja con atención y contexto. Nada de procesos confusos ni respuestas genéricas: construimos una ruta organizada según la realidad de cada cliente.",
       "backgroundLines": ["UN CAMINO", "MÁS CLARO"],
       "primaryImageAlt": "Retrato editorial de una viajera en un espacio público contemporáneo",
       "secondaryImageAlt": "Corredor arquitectónico de aeropuerto con sensación de movimiento",
       "tertiaryImageAlt": "Documentos de inmigración organizados sobre un escritorio claro",
-      "frameTitle": "Preparación",
-      "frameBody": "Revisamos, organizamos y preparamos cada documento necesario antes de que tu solicitud avance."
+      "frameTitle": "Nuestra forma de trabajar",
+      "frameBody": "Organizamos cada etapa con contexto, ritmo y revisión cuidadosa para que tu proceso avance con más claridad."
     },
     "manifesto": {
       "eyebrow": "Nuestro enfoque",
@@ -85,6 +86,8 @@
     "services": {
       "eyebrow": "Nuestros servicios",
       "title": "Todo organizado antes de que tu solicitud comience.",
+      "subtitle": "Estrategia, claridad y preparación en cada etapa de tu proceso.",
+      "ctaLabel": "Saber más",
       "items": [
         {
           "id": "preparation",
@@ -109,6 +112,37 @@
           "number": "04",
           "title": "Checklist documental de inmigración",
           "description": "Una hoja de ruta estructurada sobre lo necesario, lo pendiente y lo que sigue."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Preguntas frecuentes",
+      "title": "Todo lo que necesitas saber antes de empezar.",
+      "imageAlt": "Persona en movimiento dentro de un entorno internacional contemporáneo",
+      "items": [
+        {
+          "id": "preparation",
+          "number": "01",
+          "title": "¿Cómo funciona el proceso de inmigración en la práctica?",
+          "description": "En resumen, organizamos cada etapa contigo: entendemos tu objetivo, revisamos lo que ya existe, señalamos lo que falta y armamos un camino claro para que la solicitud avance con más seguridad."
+        },
+        {
+          "id": "review",
+          "number": "02",
+          "title": "¿Qué documentos necesito organizar primero?",
+          "description": "Normalmente empezamos por los documentos personales, los formularios principales y los materiales de apoyo de tu proceso. La idea es evitar prisas y dejar todo estructurado desde el inicio."
+        },
+        {
+          "id": "translation",
+          "number": "03",
+          "title": "¿Cuánto tiempo puede tardar en quedar lista mi solicitud?",
+          "description": "El plazo depende del tipo de proceso y de la cantidad de documentos que ya tengas disponibles. Cuando revisamos tu caso, podemos darte una idea mucho más realista de lo que falta y del tiempo involucrado."
+        },
+        {
+          "id": "checklist",
+          "number": "04",
+          "title": "¿También revisan todo antes del envío?",
+          "description": "Sí. La revisión forma parte del proceso para reducir errores, inconsistencias y documentos faltantes. La propuesta es que envíes todo con mucha más claridad y confianza."
         }
       ]
     },
@@ -152,7 +186,7 @@
       "eyebrow": "Movilidad internacional",
       "title": "Vayas donde vayas, la preparación va primero.",
       "body": "Desde planes de estudio hasta mudanzas familiares y viajes de negocios, el primer paso más sólido es un archivo completo, consistente y listo para avanzar.",
-      "imageAlt": "Ala de avión sobre las nubes durante un vuelo internacional"
+      "imageAlt": "Mapa editorial de Estados Unidos con marcadores de viaje sobre una superficie clara"
     },
     "finalCta": {
       "eyebrow": "Listos cuando tú lo estés",

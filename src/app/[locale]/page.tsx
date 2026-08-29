@@ -8,6 +8,7 @@ import { International } from "@/components/home/International";
 import { Process } from "@/components/home/Process";
 import { Services } from "@/components/home/Services";
 import { TrustMarquee } from "@/components/home/TrustMarquee";
+import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { getMessages, isLocale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -40,18 +41,21 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
       <AboutSection locale={locale} messages={messages} />
       <TrustMarquee items={messages.home.trustMarquee.items} />
       <Services
-        eyebrow={messages.home.services.eyebrow}
-        title={messages.home.services.title}
-        items={messages.home.services.items}
+        eyebrow={messages.home.faq.eyebrow}
+        title={messages.home.faq.title}
+        imageAlt={messages.home.faq.imageAlt}
+        items={messages.home.faq.items}
       />
       <Process
-        eyebrow={messages.home.process.eyebrow}
+        locale={locale}
         title={messages.home.process.title}
+        ctaLabel={messages.navigation.process}
         items={messages.home.process.items}
       />
       <Differentials {...messages.home.differentials} />
       <International {...messages.home.international} />
       <FinalCTA {...messages.home.finalCta} />
+      <FloatingWhatsApp ariaLabel={messages.common.whatsappLabel} />
     </>
   );
 }

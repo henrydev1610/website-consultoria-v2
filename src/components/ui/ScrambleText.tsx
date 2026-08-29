@@ -17,12 +17,20 @@ const ACCENTED_LETTER_POOL = Array.from(
   "ABCDEFGHJKLNOPRSTUVXYZ\u00C1\u00C0\u00C3\u00C2\u00C4\u00C9\u00C8\u00CA\u00CB\u00D3\u00D2\u00D5\u00D4\u00D6\u00DA\u00D9\u00DB\u00DC\u00C7\u00D123456789",
 );
 const DIGIT_POOL = Array.from("23456789");
-const FRAME_STEP_MS = 42;
-const DURATION_MS = 390;
+const DEFAULT_FRAME_STEP_MS = 42;
+const DEFAULT_DURATION_MS = 390;
 
 interface ScrambleTextProps {
   text: string;
   className?: string;
+  triggerMode?: "self" | "external";
+  allowWrap?: boolean;
+  durationMs?: number;
+  frameStepMs?: number;
+  staggerMs?: number;
+  completeOnLeave?: boolean;
+  progressEase?: "out" | "inOut";
+  animationMode?: "scramble" | "verticalChars";
 }
 
 export interface ScrambleTextHandle {
@@ -46,7 +54,23 @@ function getCharacterPool(char: string) {
   return LETTER_POOL;
 }
 
-function getScrambledValue(chars: string[], elapsed: number) {
+function getEasedProgress(progress: number, progressEase: "out" | "inOut") {
+  if (progressEase === "inOut") {
+    return progress < 0.5
+      ? 4 * progress * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+  }
+
+  return 1 - Math.pow(1 - progress, 3);
+}
+
+function getScrambledValue(
+  chars: string[],
+  elapsed: number,
+  durationMs: number,
+  frameStepMs: number,
+  progressEase: "out" | "inOut",
+) {
   const scramblableIndexes = chars.reduce<number[]>((indexes, char, index) => {
     if (isScramblableCharacter(char)) {
       indexes.push(index);
@@ -55,10 +79,10 @@ function getScrambledValue(chars: string[], elapsed: number) {
     return indexes;
   }, []);
 
-  const progress = Math.min(elapsed / DURATION_MS, 1);
-  const easedProgress = 1 - Math.pow(1 - progress, 3);
+  const progress = Math.min(elapsed / durationMs, 1);
+  const easedProgress = getEasedProgress(progress, progressEase);
   const resolvedCount = Math.floor(easedProgress * scramblableIndexes.length);
-  const frameBucket = Math.floor(elapsed / FRAME_STEP_MS);
+  const frameBucket = Math.floor(elapsed / frameStepMs);
 
   return chars
     .map((char, index) => {
@@ -80,181 +104,337 @@ function getScrambledValue(chars: string[], elapsed: number) {
     .join("");
 }
 
+function getDistributedDelay(index: number, staggerMs: number) {
+  // Stable distributed order avoids an obvious left-to-right sweep.
+  return ((index * 7) % 11) * staggerMs;
+}
+
 export const ScrambleText = forwardRef<ScrambleTextHandle, ScrambleTextProps>(
-  function ScrambleText({ text, className }, ref) {
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const [displayText, setDisplayText] = useState(text);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const frameRef = useRef<number | null>(null);
-  const startTimeRef = useRef<number | null>(null);
-  const measureContainerRef = useRef<HTMLSpanElement>(null);
-  const measureCharacterRefs = useRef<Array<HTMLSpanElement | null>>([]);
-  const animatedCharacterRefs = useRef<Array<HTMLSpanElement | null>>([]);
-  const originalChars = Array.from(text);
-  const displayChars = Array.from(displayText);
+  function ScrambleText(
+    {
+      text,
+      className,
+      triggerMode = "self",
+      allowWrap = false,
+      durationMs = DEFAULT_DURATION_MS,
+      frameStepMs = DEFAULT_FRAME_STEP_MS,
+      staggerMs = 12,
+      completeOnLeave = false,
+      progressEase = "out",
+      animationMode = "scramble",
+    },
+    ref,
+  ) {
+    const prefersReducedMotion = usePrefersReducedMotion();
+    const [displayText, setDisplayText] = useState(text);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [isVerticalActive, setIsVerticalActive] = useState(false);
+    const frameRef = useRef<number | null>(null);
+    const startTimeRef = useRef<number | null>(null);
+    const measureContainerRef = useRef<HTMLSpanElement>(null);
+    const measureCharacterRefs = useRef<Array<HTMLSpanElement | null>>([]);
+    const animatedCharacterRefs = useRef<Array<HTMLSpanElement | null>>([]);
+    const originalChars = Array.from(text);
+    const displayChars = Array.from(displayText);
 
-  useLayoutEffect(() => {
-    const measureContainer = measureContainerRef.current;
+    useLayoutEffect(() => {
+      const measureContainer = measureContainerRef.current;
 
-    if (!measureContainer) {
-      return;
-    }
+      if (!measureContainer || animationMode !== "scramble") {
+        return;
+      }
 
-    const syncMetrics = () => {
-      measureCharacterRefs.current.forEach((measureCharacter, index) => {
-        const animatedCharacter = animatedCharacterRefs.current[index];
+      const syncMetrics = () => {
+        measureCharacterRefs.current.forEach((measureCharacter, index) => {
+          const animatedCharacter = animatedCharacterRefs.current[index];
 
-        if (!measureCharacter || !animatedCharacter) {
-          return;
-        }
+          if (!measureCharacter || !animatedCharacter) {
+            return;
+          }
 
-        animatedCharacter.style.left = `${measureCharacter.offsetLeft}px`;
-        animatedCharacter.style.width = `${measureCharacter.offsetWidth}px`;
-      });
-    };
+          animatedCharacter.style.left = `${measureCharacter.offsetLeft}px`;
+          animatedCharacter.style.top = `${measureCharacter.offsetTop}px`;
+          animatedCharacter.style.width = `${measureCharacter.offsetWidth}px`;
+          animatedCharacter.style.height = `${measureCharacter.offsetHeight}px`;
+        });
+      };
 
-    syncMetrics();
-
-    const resizeObserver = new ResizeObserver(() => {
       syncMetrics();
-    });
 
-    resizeObserver.observe(measureContainer);
+      const resizeObserver = new ResizeObserver(() => {
+        syncMetrics();
+      });
 
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, [text]);
+      resizeObserver.observe(measureContainer);
 
-  useEffect(() => {
-    return () => {
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }, [allowWrap, animationMode, text]);
+
+    useEffect(() => {
+      return () => {
+        if (frameRef.current !== null) {
+          cancelAnimationFrame(frameRef.current);
+        }
+      };
+    }, []);
+
+    useEffect(() => {
+      setDisplayText(text);
+      setIsVerticalActive(false);
+    }, [text]);
+
+    function stopAnimation() {
       if (frameRef.current !== null) {
         cancelAnimationFrame(frameRef.current);
-      }
-    };
-  }, []);
-
-  function stopAnimation() {
-    if (frameRef.current !== null) {
-      cancelAnimationFrame(frameRef.current);
-      frameRef.current = null;
-    }
-
-    startTimeRef.current = null;
-    setDisplayText(text);
-    setIsAnimating(false);
-  }
-
-  function startAnimation() {
-    if (prefersReducedMotion || typeof window === "undefined") {
-      stopAnimation();
-      return;
-    }
-
-    if (
-      !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      stopAnimation();
-      return;
-    }
-
-    stopAnimation();
-    setIsAnimating(true);
-
-    const chars = Array.from(text);
-
-    const tick = (timestamp: number) => {
-      if (startTimeRef.current === null) {
-        startTimeRef.current = timestamp;
+        frameRef.current = null;
       }
 
-      const elapsed = timestamp - startTimeRef.current;
+      startTimeRef.current = null;
+      setDisplayText(text);
+      setIsAnimating(false);
+    }
 
-      if (elapsed >= DURATION_MS) {
+    function stopVerticalChars() {
+      setIsVerticalActive(false);
+    }
+
+    function startVerticalChars() {
+      if (prefersReducedMotion || typeof window === "undefined") {
+        stopVerticalChars();
+        return;
+      }
+
+      if (
+        !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        stopVerticalChars();
+        return;
+      }
+
+      setIsVerticalActive(true);
+    }
+
+    function startAnimation() {
+      if (animationMode === "verticalChars") {
+        startVerticalChars();
+        return;
+      }
+
+      if (prefersReducedMotion || typeof window === "undefined") {
         stopAnimation();
         return;
       }
 
-      setDisplayText(getScrambledValue(chars, elapsed));
+      if (
+        !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        stopAnimation();
+        return;
+      }
+
+      if (frameRef.current !== null) {
+        return;
+      }
+
+      stopAnimation();
+      setIsAnimating(true);
+
+      const chars = Array.from(text);
+
+      const tick = (timestamp: number) => {
+        if (startTimeRef.current === null) {
+          startTimeRef.current = timestamp;
+        }
+
+        const elapsed = timestamp - startTimeRef.current;
+
+        if (elapsed >= durationMs) {
+          stopAnimation();
+          return;
+        }
+
+        setDisplayText(getScrambledValue(chars, elapsed, durationMs, frameStepMs, progressEase));
+        frameRef.current = requestAnimationFrame(tick);
+      };
+
       frameRef.current = requestAnimationFrame(tick);
-    };
+    }
 
-    frameRef.current = requestAnimationFrame(tick);
-  }
+    useImperativeHandle(
+      ref,
+      () => ({
+        start: startAnimation,
+        stop: () => {
+          if (animationMode === "verticalChars") {
+            stopVerticalChars();
+            return;
+          }
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      start: startAnimation,
-      stop: stopAnimation,
-    }),
-  );
+          if (completeOnLeave && frameRef.current !== null) {
+            return;
+          }
 
-  function handleMouseEnter() {
-    startAnimation();
-  }
+          stopAnimation();
+        },
+      }),
+    );
 
-  function handleMouseLeave() {
-    stopAnimation();
-  }
+    function handleMouseEnter() {
+      startAnimation();
+    }
 
-  return (
-    <span
-      className={cn("relative inline-block whitespace-pre", className)}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <span className="sr-only">{text}</span>
+    function handleMouseLeave() {
+      if (animationMode === "verticalChars") {
+        stopVerticalChars();
+        return;
+      }
 
-      <span
-        ref={measureContainerRef}
-        aria-hidden="true"
-        className="invisible whitespace-pre"
-      >
-        {originalChars.map((char, index) => (
-          <span
-            key={`measure-${index}-${char}`}
-            ref={(element) => {
-              measureCharacterRefs.current[index] = element;
-            }}
-          >
-            {char}
+      if (completeOnLeave && frameRef.current !== null) {
+        return;
+      }
+
+      stopAnimation();
+    }
+
+    if (animationMode === "verticalChars") {
+      const containerClass = allowWrap
+        ? "relative block max-w-full whitespace-pre-wrap"
+        : "relative inline-block whitespace-pre";
+      const sharedTransitionStyle = prefersReducedMotion
+        ? undefined
+        : {
+            transitionDuration: `${durationMs}ms`,
+            transitionTimingFunction: "cubic-bezier(0.65, 0, 0.35, 1)",
+          };
+
+      return (
+        <span
+          className={cn(containerClass, className)}
+          onMouseEnter={triggerMode === "self" ? handleMouseEnter : undefined}
+          onMouseLeave={triggerMode === "self" ? handleMouseLeave : undefined}
+        >
+          <span className="sr-only">{text}</span>
+          <span aria-hidden="true" className={cn("block", allowWrap ? "whitespace-pre-wrap" : "whitespace-pre")}>
+            {originalChars.map((char, index) => {
+              if (char === " ") {
+                return <span key={`space-${index}`}> </span>;
+              }
+
+              if (char === "\n") {
+                return <span key={`newline-${index}`}>{"\n"}</span>;
+              }
+
+              const delay = getDistributedDelay(index, staggerMs);
+
+              return (
+                <span
+                  key={`slot-${index}-${char}`}
+                  className="relative inline-grid overflow-hidden align-top"
+                  style={{ blockSize: "1lh", gridTemplateAreas: '"stack"' }}
+                >
+                  <span
+                    className="inline-block [grid-area:stack]"
+                    style={
+                      prefersReducedMotion
+                        ? undefined
+                        : {
+                            ...sharedTransitionStyle,
+                            transitionDelay: `${delay}ms`,
+                            transform: isVerticalActive ? "translate3d(0, 100%, 0)" : "translate3d(0, 0, 0)",
+                          }
+                    }
+                  >
+                    {char}
+                  </span>
+                  <span
+                    className="inline-block [grid-area:stack]"
+                    style={
+                      prefersReducedMotion
+                        ? { transform: "translate3d(0, -100%, 0)" }
+                        : {
+                            ...sharedTransitionStyle,
+                            transitionDelay: `${delay}ms`,
+                            transform: isVerticalActive ? "translate3d(0, 0, 0)" : "translate3d(0, -100%, 0)",
+                          }
+                    }
+                  >
+                    {char}
+                  </span>
+                </span>
+              );
+            })}
           </span>
-        ))}
-      </span>
+        </span>
+      );
+    }
 
+    return (
       <span
-        aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-0 whitespace-pre",
-          isAnimating && "opacity-0",
+          allowWrap ? "relative block max-w-full whitespace-pre-wrap" : "relative inline-block whitespace-pre",
+          className,
         )}
+        onMouseEnter={triggerMode === "self" ? handleMouseEnter : undefined}
+        onMouseLeave={triggerMode === "self" ? handleMouseLeave : undefined}
       >
-        {text}
-      </span>
+        <span className="sr-only">{text}</span>
 
-      <span
-        aria-hidden="true"
-        className={cn(
-          "pointer-events-none absolute inset-0 whitespace-pre",
-          !isAnimating && "opacity-0",
-        )}
-      >
-        {displayChars.map((char, index) => (
-          <span
-            key={`animated-${index}-${originalChars[index] ?? ""}`}
-            ref={(element) => {
-              animatedCharacterRefs.current[index] = element;
-            }}
-            className="absolute top-0 text-left"
-          >
-            {char === " " ? "\u00A0" : char}
-          </span>
-        ))}
+        <span
+          ref={measureContainerRef}
+          aria-hidden="true"
+          className={allowWrap ? "invisible whitespace-pre-wrap" : "invisible whitespace-pre"}
+        >
+          {originalChars.map((char, index) => (
+            <span
+              key={`measure-${index}-${char}`}
+              ref={(element) => {
+                measureCharacterRefs.current[index] = element;
+              }}
+            >
+              {char === " " ? " " : char}
+            </span>
+          ))}
+        </span>
+
+        <span
+          aria-hidden="true"
+          className={cn(
+            allowWrap
+              ? "pointer-events-none absolute inset-0 whitespace-pre-wrap"
+              : "pointer-events-none absolute inset-0 whitespace-pre",
+            isAnimating && "opacity-0",
+          )}
+        >
+          {text}
+        </span>
+
+        <span
+          aria-hidden="true"
+          className={cn(
+            allowWrap
+              ? "pointer-events-none absolute inset-0 whitespace-pre-wrap"
+              : "pointer-events-none absolute inset-0 whitespace-pre",
+            !isAnimating && "opacity-0",
+          )}
+        >
+          {displayChars.map((char, index) => (
+            <span
+              key={`animated-${index}-${originalChars[index] ?? ""}`}
+              ref={(element) => {
+                animatedCharacterRefs.current[index] = element;
+              }}
+              className="absolute text-left"
+            >
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
+        </span>
       </span>
-    </span>
-  );
+    );
   },
 );
 

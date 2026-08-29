@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 import { aboutEditorialImages } from "@/data/images";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
@@ -15,18 +14,12 @@ import type { Locale, Messages } from "@/types";
 import { Container } from "../layout/Container";
 import { Crosshair } from "../ui/Crosshair";
 import { Eyebrow } from "../ui/Eyebrow";
+import { SplitScrambleLink } from "../ui/SplitScrambleLink";
 
 interface AboutSectionProps {
   locale: Locale;
   messages: Messages;
 }
-
-const cardLayoutClasses = [
-  "xl:col-span-7",
-  "xl:col-span-5 xl:translate-y-20",
-  "xl:col-span-5 xl:-translate-y-10",
-  "xl:col-span-7 xl:-translate-y-24",
-];
 
 const cardImageById = {
   preparation: aboutEditorialImages.leftFeature,
@@ -37,46 +30,81 @@ const cardImageById = {
 
 const aboutParallaxItems = [
   {
-    selector: '[data-about-float="top"]',
-    desktop: { from: 36, to: -34 },
-    tablet: { from: 22, to: -20 },
-    mobile: { from: 10, to: -12 },
+    selector: '[data-about-float="top-right"]',
+    desktop: { fromX: 5, toX: -4, fromY: -10, toY: 16 },
+    tablet: { fromX: 4, toX: -3, fromY: -7, toY: 11 },
+    mobile: { fromX: 2, toX: -2, fromY: -4, toY: 6 },
   },
   {
-    selector: '[data-about-float="left"]',
-    desktop: { from: 26, to: -28 },
-    tablet: { from: 16, to: -18 },
-    mobile: { from: 8, to: -9 },
+    selector: '[data-about-float="mid-left"]',
+    desktop: { fromX: -4, toX: 3, fromY: 12, toY: -18 },
+    tablet: { fromX: -3, toX: 2, fromY: 9, toY: -13 },
+    mobile: { fromX: -1.5, toX: 1.5, fromY: 5, toY: -6 },
   },
   {
-    selector: '[data-about-float="detail"]',
-    desktop: { from: 18, to: -26 },
-    tablet: { from: 12, to: -16 },
-    mobile: { from: 6, to: -8 },
+    selector: '[data-about-float="mid-right"]',
+    desktop: { fromX: 4, toX: -3, fromY: 16, toY: -12 },
+    tablet: { fromX: 3, toX: -2, fromY: 11, toY: -9 },
+    mobile: { fromX: 1.5, toX: -1.5, fromY: 5, toY: -5 },
   },
   {
-    selector: '[data-about-float="flight"]',
-    desktop: { from: 34, to: -30 },
-    tablet: { from: 20, to: -18 },
-    mobile: { from: 9, to: -11 },
+    selector: '[data-about-float="bottom-left"]',
+    desktop: { fromX: -5, toX: 4, fromY: 24, toY: -20 },
+    tablet: { fromX: -4, toX: 3, fromY: 16, toY: -14 },
+    mobile: { fromX: -2, toX: 2, fromY: 7, toY: -7 },
+  },
+  {
+    selector: '[data-about-float="bottom-right"]',
+    desktop: { fromX: 5, toX: -4, fromY: 20, toY: -16 },
+    tablet: { fromX: 4, toX: -3, fromY: 14, toY: -11 },
+    mobile: { fromX: 2, toX: -2, fromY: 6, toY: -6 },
+  },
+  {
+    selector: '[data-about-float="approach-top"]',
+    desktop: { fromX: 3, toX: -3, fromY: 14, toY: -12 },
+    tablet: { fromX: 2, toX: -2, fromY: 10, toY: -8 },
+    mobile: { fromX: 0, toX: 0, fromY: 0, toY: 0 },
+  },
+  {
+    selector: '[data-about-float="approach-mid"]',
+    desktop: { fromX: 4, toX: -4, fromY: 18, toY: -15 },
+    tablet: { fromX: 3, toX: -3, fromY: 12, toY: -10 },
+    mobile: { fromX: 0, toX: 0, fromY: 0, toY: 0 },
+  },
+  {
+    selector: '[data-about-float="approach-bottom"]',
+    desktop: { fromX: -2, toX: 3, fromY: 11, toY: -9 },
+    tablet: { fromX: -2, toX: 2, fromY: 8, toY: -6 },
+    mobile: { fromX: 0, toX: 0, fromY: 0, toY: 0 },
   },
   {
     selector: "[data-card-media]",
-    desktop: { from: 14, to: -14 },
-    tablet: { from: 9, to: -9 },
-    mobile: { from: 3, to: -3 },
+    desktop: { fromX: 0, toX: 0, fromY: 14, toY: -14 },
+    tablet: { fromX: 0, toX: 0, fromY: 9, toY: -9 },
+    mobile: { fromX: 0, toX: 0, fromY: 3, toY: -3 },
   },
 ] as const;
 
 export function AboutSection({ locale, messages }: AboutSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const aboutHeadlineRef = useRef<HTMLHeadingElement>(null);
+  const ghostRevealRef = useRef<HTMLDivElement>(null);
+  const servicesStatementRef = useRef<HTMLDivElement>(null);
   const statementRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const about = messages.home.about;
   const manifesto = messages.home.manifesto;
   const services = messages.home.services;
-  const introLink = getLocalizedPath(locale, "process");
+  const aboutLink = getLocalizedPath(locale, "about");
   const servicesLink = getLocalizedPath(locale, "services");
+  const manifestoHeadline = manifesto.text.split(/(?<=[.!?])\s+/)[0] ?? manifesto.text;
+  const manifestoHeadlineWords = manifestoHeadline.replace(/[.!?]+$/, "").split(/\s+/);
+  const manifestoLineBreakIndex = Math.ceil(manifestoHeadlineWords.length / 2);
+  const manifestoHeadlineLines = [
+    manifestoHeadlineWords.slice(0, manifestoLineBreakIndex),
+    manifestoHeadlineWords.slice(manifestoLineBreakIndex),
+  ].filter((line) => line.length > 0);
+  const serviceTitleWords = services.title.split(/\s+/);
 
   useReveal(sectionRef, {
     selector: "[data-about-reveal]",
@@ -85,14 +113,16 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
     start: "top 82%",
   });
 
+  useScrollTextReveal(aboutHeadlineRef);
+  useScrollTextReveal(ghostRevealRef);
+  useScrollTextReveal(servicesStatementRef);
   useScrollTextReveal(statementRef);
 
   const serviceCards = useMemo(
     () =>
-      services.items.map((item, index) => ({
+      services.items.map((item) => ({
         ...item,
         image: cardImageById[item.id as keyof typeof cardImageById] ?? aboutEditorialImages.preparationCard,
-        layoutClass: cardLayoutClasses[index] ?? "xl:col-span-6",
       })),
     [services.items],
   );
@@ -104,62 +134,61 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
       return;
     }
 
-    const parallaxTargets = aboutParallaxItems.map((item) => ({
-      ...item,
-      elements: Array.from(element.querySelectorAll<HTMLElement>(item.selector)),
-    }));
-
     if (prefersReducedMotion) {
-      parallaxTargets.forEach(({ elements }) => {
+      aboutParallaxItems.forEach(({ selector }) => {
+        const elements = Array.from(element.querySelectorAll<HTMLElement>(selector));
         gsap.set(elements, { clearProps: "transform" });
       });
       return;
     }
 
-    let frameId = 0;
+    ensureGsapRegistered();
+    const matchMedia = gsap.matchMedia();
+    const context = gsap.context(() => {
+      const applyParallax = (breakpoint: "desktop" | "tablet" | "mobile") => {
+        aboutParallaxItems.forEach(({ selector, ...ranges }) => {
+          const targets = Array.from(element.querySelectorAll<HTMLElement>(selector));
+          const range = ranges[breakpoint];
 
-    const updateParallax = () => {
-      frameId = 0;
-
-      const rect = element.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || 1;
-      const progress = Math.min(Math.max((viewportHeight - rect.top) / (rect.height + viewportHeight), 0), 1);
-      const viewportWidth = window.innerWidth;
-
-      parallaxTargets.forEach(({ desktop, tablet, mobile, elements }) => {
-        const range =
-          viewportWidth >= 1280
-            ? desktop
-            : viewportWidth >= 768
-              ? tablet
-              : mobile;
-        const yPercent = gsap.utils.interpolate(range.from, range.to, progress);
-
-        elements.forEach((target) => {
-          target.style.transform = `translate3d(0, ${yPercent}%, 0)`;
+          targets.forEach((target) => {
+            gsap.fromTo(
+              target,
+              {
+                xPercent: range.fromX,
+                yPercent: range.fromY,
+              },
+              {
+                xPercent: range.toX,
+                yPercent: range.toY,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: element,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 0.9,
+                },
+              },
+            );
+          });
         });
+      };
+
+      matchMedia.add("(min-width: 1280px)", () => {
+        applyParallax("desktop");
       });
-    };
 
-    const requestUpdate = () => {
-      if (frameId) {
-        return;
-      }
+      matchMedia.add("(min-width: 768px) and (max-width: 1279px)", () => {
+        applyParallax("tablet");
+      });
 
-      frameId = window.requestAnimationFrame(updateParallax);
-    };
-
-    requestUpdate();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
+      matchMedia.add("(max-width: 767px)", () => {
+        applyParallax("mobile");
+      });
+    }, element);
 
     return () => {
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-
-      if (frameId) {
-        window.cancelAnimationFrame(frameId);
-      }
+      matchMedia.revert();
+      context.revert();
     };
   }, [prefersReducedMotion]);
 
@@ -174,6 +203,10 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
     const linesX = Array.from(element.querySelectorAll<HTMLElement>("[data-about-line-x]"));
     const linesY = Array.from(element.querySelectorAll<HTMLElement>("[data-about-line-y]"));
     const ghost = element.querySelector<HTMLElement>("[data-about-ghost]");
+    const servicesGrid = element.querySelector<HTMLElement>("[data-services-grid]");
+    const serviceCards = servicesGrid
+      ? Array.from(servicesGrid.querySelectorAll<HTMLElement>("[data-service-card]"))
+      : [];
 
     if (prefersReducedMotion) {
       gsap.set(clips, { clearProps: "all", clipPath: "inset(0% 0% 0% 0%)", opacity: 1, y: 0 });
@@ -181,10 +214,12 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
       gsap.set(linesY, { scaleY: 1 });
       gsap.set("[data-crosshair]", { opacity: 1, rotate: 0 });
       gsap.set(ghost, { clearProps: "transform" });
+      gsap.set(serviceCards, { clearProps: "all", opacity: 1, x: 0, y: 0 });
       return;
     }
 
     ensureGsapRegistered();
+    const matchMedia = gsap.matchMedia();
 
     const context = gsap.context(() => {
       gsap.fromTo(
@@ -266,9 +301,73 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
           },
         );
       }
+
+      if (servicesGrid && serviceCards.length) {
+        matchMedia.add("(min-width: 768px)", () => {
+          const rows = [serviceCards.slice(0, 2), serviceCards.slice(2, 4)].filter((row) => row.length > 0);
+          const horizontalOffset = window.innerWidth >= 1280 ? 22 : 14;
+
+          rows.forEach((row) => {
+            const trigger = row[0];
+
+            if (!trigger) {
+              return;
+            }
+
+            gsap.fromTo(
+              row,
+              {
+                xPercent: (_, target) =>
+                  target instanceof HTMLElement && target.dataset.serviceDirection === "right"
+                    ? horizontalOffset
+                    : -horizontalOffset,
+                opacity: 0.32,
+              },
+              {
+                xPercent: 0,
+                opacity: 1,
+                ease: "none",
+                stagger: 0,
+                scrollTrigger: {
+                  trigger,
+                  start: "top 90%",
+                  end: "top 38%",
+                  scrub: 0.6,
+                },
+              },
+            );
+          });
+        });
+
+        matchMedia.add("(max-width: 767px)", () => {
+          serviceCards.forEach((card, index) => {
+            gsap.fromTo(
+              card,
+              {
+                xPercent: index % 2 === 0 ? -7 : 7,
+                opacity: 0.42,
+              },
+              {
+                xPercent: 0,
+                opacity: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top 92%",
+                  end: "top 58%",
+                  scrub: 0.5,
+                },
+              },
+            );
+          });
+        });
+      }
     }, element);
 
-    return () => context.revert();
+    return () => {
+      matchMedia.revert();
+      context.revert();
+    };
   }, [prefersReducedMotion]);
 
   return (
@@ -277,59 +376,43 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
       className="relative overflow-hidden bg-[#f5f4f0] text-black"
     >
       <Container className="relative py-20 md:py-28 xl:py-34">
-        <div className="relative grid gap-10 md:min-h-[72rem] md:block xl:min-h-[80rem]">
+        <div className="relative grid gap-8 md:min-h-[84rem] md:block xl:min-h-[92rem]">
           <span
             data-about-line-x
-            className="pointer-events-none absolute left-[6%] right-[24%] top-[12%] hidden h-px origin-left bg-black/10 md:block"
+            className="pointer-events-none absolute left-[5%] right-[12%] top-[11%] hidden h-px origin-left bg-black/10 md:block"
           />
           <span
             data-about-line-x
-            className="pointer-events-none absolute left-[12%] right-[10%] top-[58%] hidden h-px origin-left bg-black/10 md:block"
+            className="pointer-events-none absolute left-[10%] right-[8%] top-[56%] hidden h-px origin-left bg-black/10 md:block"
           />
           <span
             data-about-line-x
-            className="pointer-events-none absolute left-[4%] right-[4%] top-[84%] hidden h-px origin-left bg-black/10 xl:block"
+            className="pointer-events-none absolute left-[6%] right-[6%] top-[86%] hidden h-px origin-left bg-black/10 xl:block"
           />
           <span
             data-about-line-y
-            className="pointer-events-none absolute left-[26%] top-[12%] hidden h-[46%] w-px origin-top bg-black/10 md:block"
+            className="pointer-events-none absolute left-[24%] top-[11%] hidden h-[68%] w-px origin-top bg-black/10 md:block"
           />
           <span
             data-about-line-y
-            className="pointer-events-none absolute right-[20%] top-[12%] hidden h-[66%] w-px origin-top bg-black/10 xl:block"
+            className="pointer-events-none absolute right-[19%] top-[11%] hidden h-[74%] w-px origin-top bg-black/10 xl:block"
           />
 
-          <Crosshair className="left-[26%] top-[12%] hidden md:block" />
-          <Crosshair className="left-[12%] top-[58%] hidden md:block" />
-          <Crosshair className="right-[20%] top-[58%] hidden xl:block" />
-          <Crosshair className="right-[4%] top-[84%] hidden xl:block" />
+          <Crosshair className="left-[24%] top-[11%] hidden md:block" />
+          <Crosshair className="left-[10%] top-[56%] hidden md:block" />
+          <Crosshair className="right-[19%] top-[56%] hidden xl:block" />
+          <Crosshair className="right-[6%] top-[86%] hidden xl:block" />
 
           <figure
             data-about-reveal
-            data-about-float="left"
-            className="relative order-2 overflow-hidden md:absolute md:left-[4%] md:top-[34%] md:w-[18rem] md:z-0 xl:left-[5%] xl:w-[22rem]"
-          >
-            <div data-about-clip className="overflow-hidden">
-              <Image
-                src={aboutEditorialImages.leftFeature.src}
-                alt={messages.home.hero.imageAlt}
-                width={aboutEditorialImages.leftFeature.width}
-                height={aboutEditorialImages.leftFeature.height}
-                sizes="(max-width: 767px) 100vw, (max-width: 1279px) 28vw, 22rem"
-                className="aspect-[6/4.5] w-full object-cover"
-              />
-            </div>
-          </figure>
-
-          <figure
-            data-about-reveal
-            data-about-float="top"
-            className="relative order-1 ml-auto w-[44vw] max-w-[12rem] overflow-hidden md:absolute md:right-[8%] md:top-[4%] md:w-[11rem] md:z-0 xl:right-[9%] xl:w-[13rem]"
+            data-about-float="top-right"
+            aria-hidden="true"
+            className="relative order-1 ml-auto w-[42vw] max-w-[11rem] overflow-hidden md:absolute md:right-[9%] md:top-[7%] md:w-[11rem] md:z-0 xl:right-[11%] xl:w-[13rem]"
           >
             <div data-about-clip className="overflow-hidden">
               <Image
                 src={aboutEditorialImages.topPortrait.src}
-                alt={about.primaryImageAlt}
+                alt=""
                 width={aboutEditorialImages.topPortrait.width}
                 height={aboutEditorialImages.topPortrait.height}
                 sizes="(max-width: 767px) 44vw, 12rem"
@@ -338,20 +421,49 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
             </div>
           </figure>
 
-          <div className="order-3 space-y-6 md:absolute md:left-[10%] md:right-[8%] md:top-[12%] md:z-[2] xl:right-[6%]">
-            <Eyebrow data-about-reveal>{about.eyebrow}</Eyebrow>
+          <div className="order-3 relative z-[2] mx-auto flex w-full max-w-[52rem] flex-col items-center text-center md:w-[min(76vw,58rem)] md:pt-[8.5rem] xl:w-[min(72vw,66rem)] xl:pt-[8rem]">
             <h2
+              ref={aboutHeadlineRef}
               data-about-reveal
-              className="max-w-[17ch] text-[clamp(3.55rem,6.25vw,7rem)] font-[560] leading-[0.94] tracking-[-0.05em] text-black md:max-w-[15ch] xl:max-w-[17ch]"
+              className="w-full max-w-[12ch] text-center text-[clamp(4.4rem,8.3vw,10.2rem)] font-[600] leading-[0.88] tracking-[-0.055em] text-black/18 md:max-w-[24ch] xl:max-w-[28ch]"
               style={{ textWrap: "balance" }}
             >
-              {about.headlineLines.join(" ")}
+              {about.headlineLines.map((line) => (
+                <span key={line} className="block">
+                  {line.split(/\s+/).map((word, wordIndex, words) => (
+                    <span key={`${line}-${word}-${wordIndex}`}>
+                      <span data-word className="manifesto-word">
+                        {word}
+                      </span>
+                      {wordIndex < words.length - 1 ? " " : ""}
+                    </span>
+                  ))}
+                </span>
+              ))}
             </h2>
           </div>
 
+          <figure
+            data-about-reveal
+            data-about-float="mid-left"
+            aria-hidden="true"
+            className="relative order-4 hidden overflow-hidden md:absolute md:left-[8%] md:top-[45%] md:block md:w-[10rem] md:z-0 xl:left-[10%] xl:w-[11.5rem]"
+          >
+            <div data-about-clip className="overflow-hidden">
+              <Image
+                src={aboutEditorialImages.reviewCard.src}
+                alt=""
+                width={aboutEditorialImages.reviewCard.width}
+                height={aboutEditorialImages.reviewCard.height}
+                sizes="(max-width: 1279px) 16vw, 11.5rem"
+                className="aspect-square w-full object-cover"
+              />
+            </div>
+          </figure>
+
           <div
             data-about-reveal
-            className="order-5 relative border border-black/10 bg-[#f5f4f0]/92 p-6 md:absolute md:left-[36%] md:right-[10%] md:top-[62%] md:z-[2] md:p-8 xl:left-[44%] xl:right-[12%] xl:top-[61%] xl:p-10"
+            className="order-6 relative z-[3] mx-auto mt-[clamp(3rem,6vw,6.25rem)] w-full max-w-[36rem] border border-black/10 bg-[#f5f4f0]/92 p-6 md:w-[min(44vw,38rem)] md:max-w-none md:p-8 xl:w-[min(42vw,41rem)] xl:p-10"
           >
             <Crosshair className="-left-1.5 -top-1.5" />
             <Crosshair className="-right-1.5 -top-1.5" />
@@ -368,36 +480,33 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
 
             <div className="space-y-5">
               <Eyebrow className="text-black/48">{about.frameTitle}</Eyebrow>
-              <p className="max-w-[31ch] text-base leading-relaxed text-black/72 md:text-lg">
+              <p className="max-w-[26ch] text-[clamp(1.38rem,1.85vw,1.92rem)] font-[400] leading-[1.14] tracking-[-0.026em] text-black/82">
                 {about.body}
               </p>
-              <p className="max-w-[31ch] text-sm leading-relaxed text-black/52 md:text-base">
+              <p className="max-w-[33ch] text-sm leading-relaxed text-black/56 md:text-[0.98rem]">
                 {about.secondary}
               </p>
-              <Link
-                href={introLink}
-                className="group inline-flex items-center gap-3 border-b border-black/14 pb-2 text-[0.74rem] uppercase tracking-[0.28em] text-black"
-              >
-                <span>{messages.navigation.process}</span>
-                <span className="translate-x-0 text-[var(--color-accent)] transition-transform duration-300 group-hover:translate-x-1 group-focus-visible:translate-x-1">
-                  &rarr;
-                </span>
-              </Link>
+              <SplitScrambleLink
+                href={aboutLink}
+                label={about.ctaLabel}
+                className="mt-3"
+              />
             </div>
           </div>
 
           <figure
             data-about-reveal
-            data-about-float="detail"
-            className="relative order-4 overflow-hidden md:absolute md:left-[11%] md:top-[68%] md:w-[10rem] md:z-0 xl:left-[13%] xl:top-[69%] xl:w-[12rem]"
+            data-about-float="mid-right"
+            aria-hidden="true"
+            className="relative order-5 ml-auto  w-[54vw] max-w-[13rem] overflow-hidden md:absolute md:right-[9%] md:top-[37%] md:w-[11rem] md:z-0 xl:right-[11%] xl:top-[36%] xl:w-[12.5rem]"
           >
             <div data-about-clip className="overflow-hidden">
               <Image
                 src={aboutEditorialImages.documentDetail.src}
-                alt={about.tertiaryImageAlt}
+                alt=""
                 width={aboutEditorialImages.documentDetail.width}
                 height={aboutEditorialImages.documentDetail.height}
-                sizes="(max-width: 767px) 62vw, 13rem"
+                sizes="(max-width: 767px) 54vw, (max-width: 1279px) 18vw, 12.5rem"
                 className="aspect-[4/5] w-full object-cover"
               />
             </div>
@@ -405,24 +514,46 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
 
           <figure
             data-about-reveal
-            data-about-float="flight"
-            className="relative order-6 ml-auto w-[58vw] max-w-[15rem] overflow-hidden md:absolute md:right-[6%] md:top-[73%] md:w-[13rem] md:z-0 xl:right-[7%] xl:top-[72%] xl:w-[16rem]"
+            data-about-float="bottom-left"
+            aria-hidden="true"
+            className="relative order-7 hidden overflow-hidden md:absolute md:left-[7%] md:top-[73%] md:block md:w-[13rem] md:z-0 xl:left-[9%] xl:w-[15rem]"
           >
             <div data-about-clip className="overflow-hidden">
               <Image
-                src={aboutEditorialImages.flightDetail.src}
-                alt={messages.home.international.imageAlt}
-                width={aboutEditorialImages.flightDetail.width}
-                height={aboutEditorialImages.flightDetail.height}
-                sizes="(max-width: 767px) 58vw, 17rem"
-                className="aspect-[5/4] w-full object-cover"
+                src={aboutEditorialImages.leftFeature.src}
+                alt=""
+                width={aboutEditorialImages.leftFeature.width}
+                height={aboutEditorialImages.leftFeature.height}
+                sizes="(max-width: 1279px) 20vw, 15rem"
+                className="aspect-[4/5] w-full object-cover"
+              />
+            </div>
+          </figure>
+
+          <figure
+            data-about-reveal
+            data-about-float="bottom-right"
+            aria-hidden="true"
+            className="relative order-8 ml-auto w-[62vw] max-w-[16rem] overflow-hidden md:absolute md:right-[6%] md:top-[72%] md:w-[14rem] md:z-0 xl:right-[7%] xl:top-[71%] xl:w-[17rem]"
+          >
+            <div data-about-clip className="overflow-hidden">
+              <Image
+                src={aboutEditorialImages.checklistCard.src}
+                alt=""
+                width={aboutEditorialImages.checklistCard.width}
+                height={aboutEditorialImages.checklistCard.height}
+                sizes="(max-width: 767px) 62vw, (max-width: 1279px) 21vw, 17rem"
+                className="aspect-[5/3.7] w-full object-cover"
               />
             </div>
           </figure>
         </div>
 
         <div className="relative mt-18 space-y-14 md:mt-8 md:space-y-18 xl:mt-16 xl:space-y-24">
-          <div className="relative overflow-hidden border-y border-black/8 py-10 md:py-16 xl:py-20">
+          <div
+            ref={ghostRevealRef}
+            className="relative overflow-hidden border-y border-black/8 py-10 md:py-16 xl:py-20"
+          >
             <span
               data-about-line-x
               className="absolute left-0 top-0 h-px w-full origin-left bg-black/10"
@@ -440,7 +571,14 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
             >
               {about.backgroundLines.map((line) => (
                 <span key={line} className="block">
-                  {line}
+                  {line.split(/\s+/).map((word, wordIndex, words) => (
+                    <span key={`${line}-${word}-${wordIndex}`}>
+                      <span data-word className="manifesto-word">
+                        {word}
+                      </span>
+                      {wordIndex < words.length - 1 ? " " : ""}
+                    </span>
+                  ))}
                 </span>
               ))}
             </p>
@@ -465,57 +603,144 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
 
           <div
             ref={statementRef}
-            className="grid gap-8 border-t border-black/10 pt-8 md:grid-cols-[1.1fr_2.2fr] md:pt-12 xl:gap-12"
+            className="relative grid gap-8 overflow-hidden border-t border-black/10 pt-8 md:grid-cols-[1.1fr_2.2fr] md:pt-12 xl:gap-12"
           >
-            <div className="space-y-4">
+            <div className="relative z-[1] space-y-4">
               <Eyebrow data-about-reveal>{manifesto.eyebrow}</Eyebrow>
               <p data-about-reveal className="max-w-[24ch] text-sm leading-relaxed text-black/54 md:text-base">
                 {about.frameBody}
               </p>
             </div>
-            <p className="manifesto-text max-w-[18ch] text-black/18">
-              {manifesto.text.split(" ").map((word, index) => (
-                <span key={`${word}-${index}`} data-word className="manifesto-word">
-                  {word}&nbsp;
+            <h2
+              className="relative z-[1] manifesto-text max-w-[15ch] text-black/18 md:max-w-[12.75ch] xl:max-w-[13.25ch]"
+            >
+              {manifestoHeadlineLines.map((lineWords, lineIndex) => (
+                <span key={`manifesto-line-${lineIndex}`} className="block">
+                  {lineWords.map((word, wordIndex) => (
+                    <span
+                      key={`${lineIndex}-${word}-${wordIndex}`}
+                      data-word
+                      className="manifesto-word"
+                    >
+                      {word}
+                      {wordIndex < lineWords.length - 1 ? "\u00A0" : ""}
+                    </span>
+                  ))}
                 </span>
               ))}
-            </p>
+            </h2>
+
+            <figure
+              data-about-reveal
+              data-about-float="approach-top"
+              aria-hidden="true"
+              className="pointer-events-none absolute right-[6%] top-[8%] hidden overflow-hidden md:block md:w-[8.75rem] xl:right-[8%] xl:w-[10rem]"
+            >
+              <div data-about-clip className="overflow-hidden">
+                <Image
+                  src={aboutEditorialImages.consultingDetail.src}
+                  alt=""
+                  width={aboutEditorialImages.consultingDetail.width}
+                  height={aboutEditorialImages.consultingDetail.height}
+                  sizes="(max-width: 1279px) 14vw, 10rem"
+                  className="aspect-[4/5] w-full object-cover"
+                />
+              </div>
+            </figure>
+
+            <figure
+              data-about-reveal
+              data-about-float="approach-mid"
+              aria-hidden="true"
+              className="pointer-events-none absolute right-[18%] top-[42%] hidden overflow-hidden md:block md:w-[12.5rem] xl:right-[22%] xl:w-[15rem]"
+            >
+              <div data-about-clip className="overflow-hidden">
+                <Image
+                  src={aboutEditorialImages.corridorDetail.src}
+                  alt=""
+                  width={aboutEditorialImages.corridorDetail.width}
+                  height={aboutEditorialImages.corridorDetail.height}
+                  sizes="(max-width: 1279px) 22vw, 15rem"
+                  className="aspect-[5/3.8] w-full object-cover"
+                />
+              </div>
+            </figure>
+
+            <figure
+              data-about-reveal
+              data-about-float="approach-bottom"
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-[7%] right-[5%] hidden overflow-hidden md:block md:w-[7.5rem] xl:right-[10%] xl:w-[9rem]"
+            >
+              <div data-about-clip className="overflow-hidden">
+                <Image
+                  src={aboutEditorialImages.passportDetail.src}
+                  alt=""
+                  width={aboutEditorialImages.passportDetail.width}
+                  height={aboutEditorialImages.passportDetail.height}
+                  sizes="(max-width: 1279px) 12vw, 9rem"
+                  className="aspect-square w-full object-cover"
+                />
+              </div>
+            </figure>
           </div>
 
-          <div className="space-y-8 border-t border-black/10 pt-8 md:space-y-12 md:pt-12">
-            <div className="grid items-end gap-6 md:grid-cols-[1fr_1.3fr] xl:grid-cols-[1fr_1.5fr]">
-              <Eyebrow data-about-reveal>{services.eyebrow}</Eyebrow>
-              <h3 data-about-reveal className="display-lg max-w-[12ch] text-black">
-                {services.title}
+          <div className="space-y-10 border-t border-black/10 pt-10 md:space-y-14 md:pt-12 xl:space-y-16 xl:pt-14">
+            <div
+              ref={servicesStatementRef}
+              className="grid justify-items-center gap-8 md:gap-10 xl:gap-12"
+            >
+              <h3
+                data-about-reveal
+                className="w-full max-w-[15.5ch] text-left text-[clamp(4.4rem,8.3vw,10.2rem)] font-[600] leading-[0.9] tracking-[-0.055em] text-black md:max-w-[14.5ch] xl:max-w-[16.4ch]"
+                style={{ textWrap: "balance" }}
+              >
+                {serviceTitleWords.map((word, index) => (
+                  <span key={`${word}-${index}`} data-word className="manifesto-word">
+                    {word}
+                    {index < serviceTitleWords.length - 1 ? " " : ""}
+                  </span>
+                ))}
               </h3>
+              <p
+                data-about-reveal
+                className="max-w-[34ch] text-center text-[clamp(1.4rem,2.35vw,2.7rem)] font-[400] leading-[1.08] tracking-[-0.03em] text-black/66"
+              >
+                {services.subtitle}
+              </p>
             </div>
 
-            <div className="grid gap-6 xl:grid-cols-12 xl:items-start">
-              {serviceCards.map((item) => (
+            <div data-services-grid className="grid gap-6 md:auto-rows-fr md:grid-cols-2">
+              {serviceCards.map((item, index) => (
                 <article
                   key={item.id}
-                  data-about-reveal
-                  className={`relative border border-black/10 bg-[#f8f7f2] ${item.layoutClass}`}
+                  data-service-card
+                  data-service-direction={index % 2 === 0 ? "left" : "right"}
+                  className="relative flex h-full border border-black/10 bg-[#f8f7f2]"
                 >
                   <Crosshair className="-left-1.5 -top-1.5" />
                   <Crosshair className="-right-1.5 -top-1.5" />
                   <Crosshair className="-bottom-1.5 -right-1.5" />
 
-                  <div className="grid gap-0">
+                  <div className="flex h-full w-full flex-col">
                     <div className="overflow-hidden">
-                      <div data-about-clip data-card-media className="overflow-hidden">
+                      <div
+                        data-about-clip
+                        data-card-media
+                        className="aspect-[5/3.6] overflow-hidden"
+                      >
                         <Image
                           src={item.image.src}
                           alt={item.title}
                           width={item.image.width}
                           height={item.image.height}
-                          sizes="(max-width: 1279px) 100vw, 42vw"
-                          className="aspect-[5/3.6] w-full object-cover"
+                          sizes="(max-width: 767px) 100vw, 50vw"
+                          className="h-full w-full object-cover"
                         />
                       </div>
                     </div>
 
-                    <div className="grid gap-6 border-t border-black/10 p-5 md:p-6 xl:p-7">
+                    <div className="flex flex-1 flex-col gap-7 border-t border-black/10 p-5 md:gap-8 md:p-6 xl:p-7">
                       <div className="flex items-center justify-between gap-4">
                         <span className="font-mono text-[0.68rem] uppercase tracking-[0.32em] text-black/42">
                           {item.number}
@@ -525,24 +750,20 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
                         </span>
                       </div>
 
-                      <div className="grid gap-4 md:grid-cols-[1.2fr_1fr] md:items-end">
-                        <h4 className="text-[clamp(1.7rem,3.4vw,3.15rem)] uppercase leading-[0.92] tracking-[-0.04em] text-black">
+                      <div className="grid flex-1 content-start gap-5 md:gap-6">
+                        <h4 className="max-w-[16ch] text-[clamp(1.45rem,2vw,2.3rem)] uppercase leading-[0.94] tracking-[-0.04em] text-black">
                           {item.title}
                         </h4>
-                        <p className="max-w-[30ch] text-sm leading-relaxed text-black/62 md:text-base">
+                        <p className="max-w-[19ch] text-[clamp(1.6rem,2.2vw,2.7rem)] font-[400] leading-[1.08] tracking-[-0.032em] text-black/76">
                           {item.description}
                         </p>
                       </div>
 
-                      <Link
+                      <SplitScrambleLink
                         href={servicesLink}
-                        className="group inline-flex items-center gap-3 border-b border-black/12 pb-2 text-[0.72rem] uppercase tracking-[0.28em] text-black"
-                      >
-                        <span>{messages.navigation.services}</span>
-                        <span className="translate-x-0 text-[var(--color-accent)] transition-transform duration-300 group-hover:translate-x-1 group-focus-visible:translate-x-1">
-                          &rarr;
-                        </span>
-                      </Link>
+                        label={services.ctaLabel}
+                        className="mt-auto"
+                      />
                     </div>
                   </div>
                 </article>

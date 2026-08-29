@@ -30,8 +30,78 @@ export function Hero({
   imageAlt,
 }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) {
+      return;
+    }
+
+    if (prefersReducedMotion) {
+      video.pause();
+      return;
+    }
+
+    let isCancelled = false;
+
+    const markReady = () => {
+      if (isCancelled) {
+        return;
+      }
+
+      setIsVideoReady(true);
+    };
+
+    const markNotReady = () => {
+      if (isCancelled) {
+        return;
+      }
+
+      setIsVideoReady(false);
+    };
+
+    const attemptPlayback = async () => {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+
+      try {
+        const playPromise = video.play();
+
+        if (playPromise) {
+          await playPromise;
+        }
+      } catch (error) {
+        markNotReady();
+        console.error("Hero video autoplay failed", error);
+      }
+    };
+
+    const handleCanPlay = () => {
+      void attemptPlayback();
+    };
+
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      void attemptPlayback();
+    }
+
+    video.addEventListener("loadeddata", handleCanPlay);
+    video.addEventListener("canplay", handleCanPlay);
+    video.addEventListener("playing", markReady);
+    video.addEventListener("error", markNotReady);
+
+    return () => {
+      isCancelled = true;
+      video.removeEventListener("loadeddata", handleCanPlay);
+      video.removeEventListener("canplay", handleCanPlay);
+      video.removeEventListener("playing", markReady);
+      video.removeEventListener("error", markNotReady);
+    };
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
     const element = sectionRef.current;
@@ -133,6 +203,7 @@ export function Hero({
 
   return (
     <section
+      id="hero"
       ref={sectionRef}
       className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-black text-white"
     >
@@ -150,14 +221,13 @@ export function Hero({
           className="object-cover"
         />
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={homeImages.hero.src}
-          onCanPlay={() => setIsVideoReady(true)}
-          onLoadedData={() => setIsVideoReady(true)}
           aria-hidden="true"
           className={cn(
             "absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-700 ease-out md:object-center",
@@ -176,30 +246,30 @@ export function Hero({
       </div>
 
       <Container className="hero-shell relative z-[2] mb-[100px] w-full pb-11 pt-34 md:pb-14 xl:pb-18 xl:pt-35">
-        <div className="hero-content-grid grid-layout items-end gap-y-10">
-          <div className="hero-heading-group col-span-4 grid gap-4 md:col-span-6 md:gap-10 xl:col-span-7">
+        <div className="hero-content-grid grid-layout items-end justify-items-center gap-y-10 md:justify-items-stretch">
+          <div className="hero-heading-group col-span-4 grid justify-items-center gap-4 text-center md:col-span-6 md:justify-items-start md:gap-10 md:text-left xl:col-span-7">
             <Eyebrow
-              className="text-white/62"
+              className="text-center text-white/62 md:text-left"
               data-hero-eyebrow
             >
               {eyebrow}
             </Eyebrow>
             <h1
               data-hero-title
-              className={cn("display-xl z-50] hero-title text-white")}
+              className={cn("display-xl hero-title justify-self-start text-left text-white")}
             >
               <RevealText lines={title} />
             </h1>
           </div>
 
-          <div className="hero-detail-group col-span-4 grid gap-6 md:col-span-7 md:col-start-2 xl:col-span-3 xl:col-start-10">
+          <div className="hero-detail-group col-span-4 grid w-full justify-self-start justify-items-start gap-6 text-left md:col-span-7 md:col-start-2 md:justify-items-start md:text-left xl:col-span-3 xl:col-start-10">
             <p
               data-hero-copy
-              className="hero-description max-w-[29ch] text-[1rem] leading-relaxed text-white/78 md:text-[1.05rem]"
+              className="hero-description justify-self-start max-w-[29ch] text-[1rem] leading-relaxed text-white/78 md:text-[1.05rem]"
             >
               {description}
             </p>
-            <div data-hero-cta>
+            <div data-hero-cta className="flex justify-center md:block">
               <Button
                 href={siteConfig.ctaUrl}
                 variant="light"

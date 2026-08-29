@@ -3,24 +3,31 @@
 import { useEffect, useRef } from "react";
 
 import { useReveal } from "@/hooks/useReveal";
+import { useScrollTextReveal } from "@/hooks/useScrollTextReveal";
+import { getLocalizedPath } from "@/lib/i18n";
 import { ensureGsapRegistered, gsap } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-import type { ProcessStep } from "@/types";
+import type { Locale, ProcessStep } from "@/types";
 
 import { Container } from "../layout/Container";
-import { Eyebrow } from "../ui/Eyebrow";
+import { SplitScrambleLink } from "../ui/SplitScrambleLink";
 
 interface ProcessProps {
-  eyebrow: string;
+  locale: Locale;
   title: string;
+  ctaLabel: string;
   items: ProcessStep[];
 }
 
-export function Process({ eyebrow, title, items }: ProcessProps) {
+export function Process({ locale, title, ctaLabel, items }: ProcessProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const titleRevealRef = useRef<HTMLHeadingElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const titleWords = title.split(/\s+/);
+  const ctaHref = getLocalizedPath(locale, "process");
 
   useReveal(sectionRef, { selector: "[data-process-head]" });
+  useScrollTextReveal(titleRevealRef);
 
   useEffect(() => {
     const element = sectionRef.current;
@@ -81,10 +88,18 @@ export function Process({ eyebrow, title, items }: ProcessProps) {
     <section ref={sectionRef} className="bg-white py-22 md:py-30">
       <Container className="space-y-12">
         <div className="grid-layout gap-y-6">
-          <div className="col-span-4 space-y-5 md:col-span-5 xl:col-span-4">
-            <Eyebrow data-process-head>{eyebrow}</Eyebrow>
-            <h2 data-process-head className="display-lg max-w-[11ch] text-black">
-              {title}
+          <div className="col-span-4 mb-[8rem] mt-[5rem] md:col-span-8 xl:col-span-11">
+            <h2
+              ref={titleRevealRef}
+              className="w-full max-w-[12ch] text-center text-[clamp(4.4rem,8.3vw,10.2rem)] font-[600] leading-[0.88] tracking-[-0.055em] text-black/18 md:max-w-[24ch] xl:max-w-[28ch]"
+              style={{ textWrap: "balance" }}
+            >
+              {titleWords.map((word, index) => (
+                <span key={`${word}-${index}`} data-word className="manifesto-word">
+                  {word}
+                  {index < titleWords.length - 1 ? " " : ""}
+                </span>
+              ))}
             </h2>
           </div>
         </div>
@@ -115,6 +130,10 @@ export function Process({ eyebrow, title, items }: ProcessProps) {
               ) : null}
             </div>
           ))}
+        </div>
+
+        <div className="flex justify-center pt-[clamp(3rem,6vw,7rem)]">
+          <SplitScrambleLink href={ctaHref} label={ctaLabel} className="mx-auto" />
         </div>
       </Container>
     </section>

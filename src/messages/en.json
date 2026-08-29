@@ -31,6 +31,7 @@
     "startProcess": "Start your process",
     "startProcessLong": "Start my process",
     "languageLabel": "Language",
+    "whatsappLabel": "Talk on WhatsApp",
     "viewPage": "View page",
     "notAvailableYet": "This page is prepared for the next stage."
   },
@@ -63,20 +64,20 @@
     },
     "about": {
       "eyebrow": "Who we are",
+      "ctaLabel": "Who we are",
       "headlineLines": [
-        "We organize the path",
-        "before it becomes",
-        "complicated."
+        "We make complex paths",
+        "clearer from the very first step."
       ],
-      "title": "Preparing your documents should not feel more complicated than the journey itself.",
-      "body": "Onio Global Solutions was created to turn paperwork into structure. We review requirements, organize files, and build a clearer sequence before your application moves forward.",
-      "secondary": "The goal is not noise. It is a confident file, a cleaner process, and fewer avoidable mistakes along the way.",
+      "title": "Clarity, context, and close support for turning important decisions into an organized process.",
+      "body": "Immigration involves documents, decisions, and important moments. Our role is to organize all of it with clarity, strategy, and close guidance, so you always know where you are and what comes next.",
+      "secondary": "From document preparation to final review, every stage is handled with attention and context. No confusing process and no generic answers: we build an organized journey around the reality of each client.",
       "backgroundLines": ["A CLEARER", "WAY FORWARD"],
       "primaryImageAlt": "Editorial portrait of a traveler in a contemporary public space",
       "secondaryImageAlt": "Architectural airport corridor with directional movement",
       "tertiaryImageAlt": "Organized immigration paperwork on a clean desk",
-      "frameTitle": "Preparation",
-      "frameBody": "We review, organize, and prepare every required document before your application advances."
+      "frameTitle": "Our way of working",
+      "frameBody": "We organize each stage with context, rhythm, and careful review so your journey can move forward with more clarity."
     },
     "manifesto": {
       "eyebrow": "Our approach",
@@ -85,6 +86,8 @@
     "services": {
       "eyebrow": "Our services",
       "title": "Everything organized before your application begins.",
+      "subtitle": "Strategy, clarity, and preparation at every stage of your process.",
+      "ctaLabel": "Learn more",
       "items": [
         {
           "id": "preparation",
@@ -109,6 +112,37 @@
           "number": "04",
           "title": "Immigration document checklist",
           "description": "A structured roadmap of what is needed, what is pending, and what comes next."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Frequently asked questions",
+      "title": "Everything you need to know before you start.",
+      "imageAlt": "Traveler moving through a contemporary international setting",
+      "items": [
+        {
+          "id": "preparation",
+          "number": "01",
+          "title": "How does the immigration process work in practice?",
+          "description": "In short, we organize each step with you: we understand your goal, review what already exists, point out what is missing, and build a clear path so the application can move forward with more confidence."
+        },
+        {
+          "id": "review",
+          "number": "02",
+          "title": "Which documents should I organize first?",
+          "description": "We usually start with personal documents, the main forms, and the supporting materials related to your process. The goal is to avoid a rush later and get everything structured from the start."
+        },
+        {
+          "id": "translation",
+          "number": "03",
+          "title": "How long can it take to get my application ready?",
+          "description": "That depends on the type of process and on how many documents you already have available. Once we review your case, we can give you a much more realistic sense of what is missing and the time involved."
+        },
+        {
+          "id": "checklist",
+          "number": "04",
+          "title": "Do you help review everything before submission?",
+          "description": "Yes. Review is part of the process to reduce mistakes, inconsistencies, and missing documents. The idea is for you to submit everything with much more clarity and confidence."
         }
       ]
     },
@@ -152,7 +186,7 @@
       "eyebrow": "International mobility",
       "title": "Wherever you are headed, preparation comes first.",
       "body": "From study plans to family moves and business travel, the strongest first step is a file that is complete, consistent, and ready to move.",
-      "imageAlt": "Airplane wing above clouds during an international flight"
+      "imageAlt": "Editorial United States map with travel markers on a light surface"
     },
     "finalCta": {
       "eyebrow": "Ready when you are",

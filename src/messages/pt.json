@@ -182,6 +182,55 @@
         "Revisão humana"
       ]
     },
+    "testimonials": {
+      "eyebrow": "Testemunhos",
+      "title": ["Histórias de quem", "já passou por esse caminho."],
+      "previousLabel": "Depoimento anterior",
+      "nextLabel": "Próximo depoimento",
+      "carouselLabel": "Carrossel de testemunhos",
+      "items": [
+        {
+          "id": "01",
+          "quote": "O que parecia uma lista enorme de documentos começou a fazer sentido quando tudo foi colocado em ordem. Conseguimos visualizar cada etapa e seguir com muito mais tranquilidade.",
+          "name": "Mariana R.",
+          "context": "Preparação documental",
+          "image": "/images/testimonials/person-01.jpg",
+          "imageAlt": "Retrato ilustrativo de uma profissional em ambiente de trabalho"
+        },
+        {
+          "id": "02",
+          "quote": "Eu tinha várias dúvidas sobre o que precisava enviar e em qual momento. A organização do processo trouxe clareza e evitou aquela sensação de estar sempre esquecendo alguma coisa.",
+          "name": "Carlos M.",
+          "context": "Organização do processo",
+          "image": "/images/testimonials/person-02.jpg",
+          "imageAlt": "Retrato ilustrativo de uma pessoa em ambiente profissional"
+        },
+        {
+          "id": "03",
+          "quote": "O acompanhamento foi próximo e direto. Sempre sabíamos o que já estava pronto, o que ainda faltava e qual seria o próximo passo.",
+          "name": "Fernanda L.",
+          "context": "Revisão documental",
+          "image": "/images/testimonials/person-03.jpg",
+          "imageAlt": "Retrato ilustrativo de uma pessoa segurando materiais de trabalho"
+        },
+        {
+          "id": "04",
+          "quote": "A maior diferença foi conseguir transformar um processo que parecia complicado em etapas claras e objetivas.",
+          "name": "Rafael S.",
+          "context": "Planejamento documental",
+          "image": "/images/testimonials/person-04.jpg",
+          "imageAlt": "Retrato ilustrativo de um profissional com documentos em mãos"
+        },
+        {
+          "id": "05",
+          "quote": "Ter tudo revisado antes de avançar trouxe muito mais segurança para tomar as próximas decisões.",
+          "name": "Ana P.",
+          "context": "Revisão e preparação",
+          "image": "/images/testimonials/person-05.jpg",
+          "imageAlt": "Retrato ilustrativo de uma pessoa em mesa de trabalho"
+        }
+      ]
+    },
     "international": {
       "eyebrow": "Mobilidade internacional",
       "title": "Para onde quer que você vá, a preparação vem primeiro.",

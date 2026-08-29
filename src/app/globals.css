@@ -303,6 +303,15 @@ select {
   text-transform: uppercase;
 }
 
+.testimonials-scroller {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.testimonials-scroller::-webkit-scrollbar {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .grid-layout {
     grid-template-columns: repeat(8, minmax(0, 1fr));

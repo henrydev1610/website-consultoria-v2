@@ -51,4 +51,13 @@ export interface ProcessStep {
   description: string;
 }
 
+export interface Testimonial {
+  id: string;
+  quote: string;
+  name: string;
+  context: string;
+  image: string;
+  imageAlt: string;
+}
+
 export type Messages = typeof en;

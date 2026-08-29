@@ -182,6 +182,55 @@
         "Human review"
       ]
     },
+    "testimonials": {
+      "eyebrow": "Testimonials",
+      "title": ["Stories from people", "who have already been through it."],
+      "previousLabel": "Previous testimonial",
+      "nextLabel": "Next testimonial",
+      "carouselLabel": "Testimonials carousel",
+      "items": [
+        {
+          "id": "01",
+          "quote": "What felt like a huge list of documents started to make sense once everything was put in order. We could see each step clearly and move forward with much more peace of mind.",
+          "name": "Mariana R.",
+          "context": "Document preparation",
+          "image": "/images/testimonials/person-01.jpg",
+          "imageAlt": "Illustrative portrait of a professional in a work setting"
+        },
+        {
+          "id": "02",
+          "quote": "I had a lot of questions about what needed to be sent and when. Organizing the process brought clarity and removed that constant feeling that something might be missing.",
+          "name": "Carlos M.",
+          "context": "Process organization",
+          "image": "/images/testimonials/person-02.jpg",
+          "imageAlt": "Illustrative portrait of a person in a professional setting"
+        },
+        {
+          "id": "03",
+          "quote": "The guidance was close and direct. We always knew what was already done, what was still missing, and what the next step would be.",
+          "name": "Fernanda L.",
+          "context": "Document review",
+          "image": "/images/testimonials/person-03.jpg",
+          "imageAlt": "Illustrative portrait of a person holding work materials"
+        },
+        {
+          "id": "04",
+          "quote": "The biggest difference was turning something that felt complicated into clear, objective steps.",
+          "name": "Rafael S.",
+          "context": "Document planning",
+          "image": "/images/testimonials/person-04.jpg",
+          "imageAlt": "Illustrative portrait of a professional holding documents"
+        },
+        {
+          "id": "05",
+          "quote": "Having everything reviewed before moving forward gave me much more confidence to make the next decisions.",
+          "name": "Ana P.",
+          "context": "Review and preparation",
+          "image": "/images/testimonials/person-05.jpg",
+          "imageAlt": "Illustrative portrait of a person at a work desk"
+        }
+      ]
+    },
     "international": {
       "eyebrow": "International mobility",
       "title": "Wherever you are headed, preparation comes first.",

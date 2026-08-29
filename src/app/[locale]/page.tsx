@@ -7,6 +7,7 @@ import { Hero } from "@/components/home/Hero";
 import { International } from "@/components/home/International";
 import { Process } from "@/components/home/Process";
 import { Services } from "@/components/home/Services";
+import { Testimonials } from "@/components/home/Testimonials";
 import { TrustMarquee } from "@/components/home/TrustMarquee";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { getMessages, isLocale } from "@/lib/i18n";
@@ -53,6 +54,7 @@ export default async function HomePage(props: PageProps<"/[locale]">) {
         items={messages.home.process.items}
       />
       <Differentials {...messages.home.differentials} />
+      <Testimonials {...messages.home.testimonials} />
       <International {...messages.home.international} />
       <FinalCTA {...messages.home.finalCta} />
       <FloatingWhatsApp ariaLabel={messages.common.whatsappLabel} />

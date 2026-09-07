@@ -272,7 +272,36 @@
     "contact": {
       "eyebrow": "Contacto",
       "title": "Inicia la conversación con tu destino ya en perspectiva.",
-      "body": "Esta página está preparada para la experiencia completa de contacto, formulario de entrada y datos regionales."
+      "body": "Completa el formulario a continuación y nuestro equipo se pondrá en contacto para entender tu objetivo y organizar los próximos pasos.",
+      "form": {
+        "eyebrow": "Habla con nosotros",
+        "title": "Organicemos tu próximo paso.",
+        "nameLabel": "Nombre completo",
+        "namePlaceholder": "Tu nombre",
+        "emailLabel": "Correo electrónico",
+        "emailPlaceholder": "tucorreo@ejemplo.com",
+        "phoneLabel": "Teléfono / WhatsApp",
+        "phonePlaceholder": "+52 (55) 0000-0000",
+        "messageLabel": "Cuéntanos un poco sobre tu objetivo",
+        "messagePlaceholder": "Quiero organizar mi documentación para...",
+        "submitLabel": "Enviar mensaje",
+        "successTitle": "Mensaje enviado",
+        "successBody": "Gracias por contactarnos. Nuestro equipo responde en un plazo de 1 día hábil."
+      },
+      "info": {
+        "eyebrow": "Oficina",
+        "addressLabel": "Dirección",
+        "address": "500 Brickell Avenue, Suite 1200, Miami, FL 33131, Estados Unidos",
+        "emailLabel": "Correo electrónico",
+        "phoneLabel": "Teléfono",
+        "whatsappLabel": "WhatsApp",
+        "languagesLabel": "Idiomas",
+        "languages": "Portugués, inglés y español",
+        "hoursLabel": "Horario de atención",
+        "hours": "Lunes a viernes, de 9am a 6pm (GMT-5)",
+        "socialLabel": "Redes sociales",
+        "mapAlt": "Mapa con la ubicación ficticia de la oficina en Miami"
+      }
     }
   }
 }

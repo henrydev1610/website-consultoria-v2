@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
+import { ContactExperience } from "@/components/contact/ContactExperience";
 import { createPageMetadata } from "@/lib/metadata";
 import { getMessages, isLocale } from "@/lib/i18n";
 
@@ -27,5 +27,5 @@ export default async function ContactPage(props: PageProps<"/[locale]/contato">)
   const locale = localeParam;
   const messages = getMessages(locale);
 
-  return <PlaceholderPage locale={locale} messages={messages} routeKey="contact" />;
+  return <ContactExperience messages={messages} />;
 }

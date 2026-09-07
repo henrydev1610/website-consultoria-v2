@@ -6,8 +6,18 @@ import { ensureGsapRegistered, gsap } from "@/lib/gsap";
 
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
-export function useScrollTextReveal(scope: RefObject<HTMLElement | null>) {
+interface ScrollTextRevealOptions {
+  start?: string;
+  end?: string;
+}
+
+export function useScrollTextReveal(
+  scope: RefObject<HTMLElement | null>,
+  options: ScrollTextRevealOptions = {},
+) {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const start = options.start ?? "top 68%";
+  const end = options.end ?? "bottom 48%";
 
   useEffect(() => {
     const element = scope.current;
@@ -39,8 +49,8 @@ export function useScrollTextReveal(scope: RefObject<HTMLElement | null>) {
           stagger: 0.18,
           scrollTrigger: {
             trigger: element,
-            start: "top 68%",
-            end: "bottom 48%",
+            start,
+            end,
             scrub: true,
           },
         },
@@ -48,5 +58,5 @@ export function useScrollTextReveal(scope: RefObject<HTMLElement | null>) {
     }, element);
 
     return () => context.revert();
-  }, [prefersReducedMotion, scope]);
+  }, [prefersReducedMotion, scope, start, end]);
 }

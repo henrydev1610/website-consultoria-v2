@@ -54,9 +54,11 @@ export function LocaleSwitcher({
             type="button"
             onClick={() => switchLocale(item)}
             className={cn(
-              "transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
+              "transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-active)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
               item === locale
-                ? "text-[var(--color-accent)]"
+                ? inverted
+                  ? "text-[var(--color-primary-border)]"
+                  : "text-black underline decoration-[var(--color-primary-active)] decoration-2 underline-offset-4"
                 : inverted
                   ? "text-white/72 hover:text-white"
                   : "text-black/56 hover:text-black",

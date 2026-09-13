@@ -3,7 +3,12 @@
 :root {
   --color-background-dark: #000000;
   --color-background-light: #ffffff;
-  --color-accent: #ff3d00;
+  --color-primary: #5BA7FF;
+  --color-primary-hover: #4296F5;
+  --color-primary-active: #3487E8;
+  --color-primary-light: #EAF4FF;
+  --color-primary-border: #8BC2FF;
+  --color-accent: var(--color-primary);
   --color-text-primary: #111111;
   --color-text-light: #ffffff;
   --color-text-muted: #8f8f8f;
@@ -88,8 +93,8 @@ select {
 }
 
 ::selection {
-  background: var(--color-accent);
-  color: #000;
+  background: var(--color-primary-active);
+  color: #fff;
 }
 
 ::-webkit-scrollbar {
@@ -105,7 +110,7 @@ select {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-primary-active);
   outline-offset: 3px;
 }
 
@@ -244,7 +249,7 @@ select {
 
 .header-cta-fill {
   z-index: 0;
-  background: var(--color-accent);
+  background: var(--color-primary);
   transform: scaleY(0);
   transform-origin: top;
   transition:
@@ -256,7 +261,7 @@ select {
 }
 
 .header-cta:focus-visible .header-cta-shell {
-  border-color: var(--color-accent);
+  border-color: var(--color-primary);
   color: #fff;
 }
 
@@ -267,7 +272,7 @@ select {
 
 @media (hover: hover) and (pointer: fine) {
   .header-cta:hover .header-cta-shell {
-    border-color: var(--color-accent);
+    border-color: var(--color-primary-hover);
     color: #fff;
   }
 

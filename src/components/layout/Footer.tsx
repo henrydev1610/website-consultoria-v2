@@ -27,7 +27,13 @@ export function Footer({ locale, messages }: FooterProps) {
             <p className="max-w-[32ch] text-base leading-relaxed text-white/70">
               {messages.footer.tagline}
             </p>
-            <Button href={siteConfig.ctaUrl} variant="light">
+            <Button
+              href={siteConfig.ctaUrl}
+              wrapperClassName="header-cta"
+              fillClassName="header-cta-fill"
+              scrambleText={messages.common.startProcess}
+              className="header-cta-shell border-white bg-transparent text-white"
+            >
               {messages.common.startProcess}
             </Button>
           </div>

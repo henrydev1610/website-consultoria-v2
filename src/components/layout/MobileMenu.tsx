@@ -203,7 +203,7 @@ export function MobileMenu({
                 <span className="flex-1 text-[clamp(2.1rem,12vw,4.7rem)] leading-[0.88]">
                     {messages.navigation[item.key]}
                   </span>
-                  <span className="text-lg text-[var(--color-accent)]">-&gt;</span>
+                  <span className="text-lg text-[var(--color-primary-border)]">-&gt;</span>
                 </Link>
               </div>
           ))}

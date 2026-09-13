@@ -208,7 +208,7 @@ export function SplitScrambleLink({
         <span
           ref={leftArrowTileRef}
           className={cn(
-            "grid h-full w-full place-items-center border border-white/24 bg-[var(--color-accent)] text-[1.12rem] text-white",
+            "grid h-full w-full place-items-center border border-white/24 bg-[var(--color-primary)] text-[1.12rem] text-white transition-colors duration-300 group-hover/split:border-white/36 group-hover/split:bg-[var(--color-primary-hover)] group-focus-visible/split:border-white/36 group-focus-visible/split:bg-[var(--color-primary-hover)] group-active/split:bg-[var(--color-primary-active)]",
             arrowClassName,
           )}
         >
@@ -219,7 +219,7 @@ export function SplitScrambleLink({
       <span
         ref={textCellRef}
         className={cn(
-          "relative z-[1] inline-flex w-[var(--split-text-width)] min-w-0 items-center justify-center overflow-hidden whitespace-nowrap border border-white/24 bg-[var(--color-accent)] px-6 text-[clamp(0.98rem,1.08vw,1.08rem)] font-[560] uppercase tracking-[0.01em] text-white md:px-7",
+          "relative z-[1] inline-flex w-[var(--split-text-width)] min-w-0 items-center justify-center overflow-hidden whitespace-nowrap border border-white/24 bg-[var(--color-primary)] px-6 text-[clamp(0.98rem,1.08vw,1.08rem)] font-[560] uppercase tracking-[0.01em] text-white transition-colors duration-300 group-hover/split:border-white/36 group-hover/split:bg-[var(--color-primary-hover)] group-focus-visible/split:border-white/36 group-focus-visible/split:bg-[var(--color-primary-hover)] group-active/split:bg-[var(--color-primary-active)] md:px-7",
           labelClassName,
         )}
       >
@@ -239,7 +239,7 @@ export function SplitScrambleLink({
         <span
           ref={rightArrowTileRef}
           className={cn(
-            "grid h-full w-full place-items-center border border-white/24 bg-[var(--color-accent)] text-[1.12rem] text-white",
+            "grid h-full w-full place-items-center border border-white/24 bg-[var(--color-primary)] text-[1.12rem] text-white transition-colors duration-300 group-hover/split:border-white/36 group-hover/split:bg-[var(--color-primary-hover)] group-focus-visible/split:border-white/36 group-focus-visible/split:bg-[var(--color-primary-hover)] group-active/split:bg-[var(--color-primary-active)]",
             arrowClassName,
           )}
         >

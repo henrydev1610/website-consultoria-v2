@@ -67,18 +67,21 @@ export function FloatingWhatsApp({
         aria-label={ariaLabel}
         tabIndex={isVisible ? 0 : -1}
         className={cn(
-          "pointer-events-auto inline-flex h-[3.625rem] w-[3.625rem] items-center justify-center border border-white/18 bg-[var(--color-accent)] text-white outline-none md:h-[3.9rem] md:w-[3.9rem]",
+          "pointer-events-auto inline-flex h-[3.625rem] w-[3.625rem] items-center justify-center border border-white/24 bg-[var(--color-primary)] text-white outline-none md:h-[3.9rem] md:w-[3.9rem]",
           "transition-transform duration-[380ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[0.96] focus-visible:scale-[0.96]",
-          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgba(17,17,17,0.6)] motion-reduce:transition-opacity",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-primary-active)] motion-reduce:transition-opacity",
         )}
       >
         <span className="sr-only">{ariaLabel}</span>
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"
-          className="h-[1.6rem] w-[1.6rem] fill-current md:h-[1.72rem] md:w-[1.72rem]"
+          className="h-[1.6rem] w-[1.6rem] fill-white text-white md:h-[1.72rem] md:w-[1.72rem]"
         >
-          <path d="M19.05 4.94A9.9 9.9 0 0 0 12 2a9.95 9.95 0 0 0-8.63 14.93L2 22l5.22-1.36A9.95 9.95 0 0 0 12 22h.01A9.99 9.99 0 0 0 22 12.05a9.9 9.9 0 0 0-2.95-7.11Zm-7.04 15.37h-.01a8.3 8.3 0 0 1-4.23-1.15l-.3-.18-3.1.81.83-3.03-.2-.31a8.28 8.28 0 0 1 7-12.75 8.21 8.21 0 0 1 5.88 2.44 8.27 8.27 0 0 1-5.87 14.17Zm4.54-6.2c-.25-.12-1.5-.74-1.73-.82-.23-.09-.4-.13-.56.12-.17.25-.65.82-.8.99-.15.17-.3.19-.56.07-.25-.13-1.08-.4-2.05-1.28a7.66 7.66 0 0 1-1.42-1.76c-.15-.25-.02-.39.11-.52.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.07-.13-.56-1.36-.77-1.86-.2-.48-.41-.41-.56-.42h-.48c-.17 0-.43.06-.65.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.42 1.01 2.59.13.17 1.75 2.67 4.24 3.74.59.25 1.05.4 1.41.51.59.19 1.12.16 1.54.1.47-.07 1.5-.61 1.71-1.2.21-.6.21-1.11.15-1.21-.06-.1-.22-.15-.48-.28Z" />
+          <path
+            fill="#FFFFFF"
+            d="M19.05 4.94A9.9 9.9 0 0 0 12 2a9.95 9.95 0 0 0-8.63 14.93L2 22l5.22-1.36A9.95 9.95 0 0 0 12 22h.01A9.99 9.99 0 0 0 22 12.05a9.9 9.9 0 0 0-2.95-7.11Zm-7.04 15.37h-.01a8.3 8.3 0 0 1-4.23-1.15l-.3-.18-3.1.81.83-3.03-.2-.31a8.28 8.28 0 0 1 7-12.75 8.21 8.21 0 0 1 5.88 2.44 8.27 8.27 0 0 1-5.87 14.17Zm4.54-6.2c-.25-.12-1.5-.74-1.73-.82-.23-.09-.4-.13-.56.12-.17.25-.65.82-.8.99-.15.17-.3.19-.56.07-.25-.13-1.08-.4-2.05-1.28a7.66 7.66 0 0 1-1.42-1.76c-.15-.25-.02-.39.11-.52.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.07-.13-.56-1.36-.77-1.86-.2-.48-.41-.41-.56-.42h-.48c-.17 0-.43.06-.65.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.42 1.01 2.59.13.17 1.75 2.67 4.24 3.74.59.25 1.05.4 1.41.51.59.19 1.12.16 1.54.1.47-.07 1.5-.61 1.71-1.2.21-.6.21-1.11.15-1.21-.06-.1-.22-.15-.48-.28Z"
+          />
         </svg>
       </a>
     </div>

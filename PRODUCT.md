@@ -38,7 +38,7 @@ The main flow is a multilingual marketing website with localized routes, strong 
 ## Brand Commitments
 
 - The visual direction is premium, editorial, technical, and internationally oriented.
-- The palette is anchored in black, white, and a restrained precision accent of `#FF3D00`.
+- The palette is anchored in black, white, and a restrained precision accent of `#5BA7FF`.
 - The site must not resemble a generic SaaS template, old-fashioned legal office, or animation showcase.
 
 ## Evidence on Hand

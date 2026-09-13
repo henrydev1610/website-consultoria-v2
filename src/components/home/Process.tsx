@@ -112,7 +112,7 @@ export function Process({ locale, title, ctaLabel, items }: ProcessProps) {
                 data-process-row
                 className="grid gap-5 px-5 py-7 md:grid-cols-[110px_1.4fr_1fr] md:px-8 xl:grid-cols-[140px_1.2fr_0.9fr] xl:px-10"
               >
-                <span className="font-mono text-[0.72rem] uppercase tracking-[0.32em] text-[var(--color-accent)]">
+                <span className="font-mono text-[0.72rem] uppercase tracking-[0.32em] text-black">
                   {item.number}
                 </span>
                 <h3 className="text-[clamp(1.8rem,3.2vw,2.8rem)] uppercase leading-[0.95] tracking-[-0.04em] text-black">

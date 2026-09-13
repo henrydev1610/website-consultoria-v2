@@ -24,7 +24,7 @@ const variantClasses = {
   dark: "border-black bg-transparent text-black hover:bg-black hover:text-white",
   light: "border-white/32 bg-transparent text-white hover:border-white hover:bg-white hover:text-black",
   accent:
-    "border-[var(--color-accent)] bg-[var(--color-accent)] text-black hover:bg-transparent hover:text-[var(--color-accent)]",
+    "border-[var(--color-primary)] bg-[var(--color-primary)] text-white hover:border-[var(--color-primary-hover)] hover:bg-[var(--color-primary-hover)] active:border-[var(--color-primary-active)] active:bg-[var(--color-primary-active)]",
 };
 
 interface ButtonInnerProps extends ButtonProps {

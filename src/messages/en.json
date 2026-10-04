@@ -133,12 +133,6 @@
           "description": "We usually start with personal documents, the main forms, and the supporting materials related to your process. The goal is to avoid a rush later and get everything structured from the start."
         },
         {
-          "id": "translation",
-          "number": "03",
-          "title": "How long can it take to get my application ready?",
-          "description": "That depends on the type of process and on how many documents you already have available. Once we review your case, we can give you a much more realistic sense of what is missing and the time involved."
-        },
-        {
           "id": "checklist",
           "number": "04",
           "title": "Do you help review everything before submission?",

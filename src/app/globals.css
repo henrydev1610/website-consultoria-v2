@@ -161,7 +161,7 @@ select {
 
 .hero-title {
   max-width: 9ch;
-  font-size: clamp(3.3rem, 9.8vw, 9.55rem);
+  font-size: min(clamp(2.8rem, 8.3vw, 8.1rem), clamp(3.75rem, 7vw, 8.7rem));
   line-height: 0.86;
 }
 
@@ -184,7 +184,7 @@ select {
 }
 
 .about-ghost-heading {
-  font-size: clamp(5rem, 11vw, 12rem);
+  font-size: clamp(3.75rem, 7vw, 8.7rem);
   line-height: 0.8;
   letter-spacing: -0.06em;
   font-weight: 600;
@@ -331,14 +331,14 @@ select {
 
 @media (max-height: 900px) and (min-width: 1024px) {
   .hero-title {
-    font-size: clamp(3.15rem, 8.9vw, 8.95rem);
+    font-size: min(clamp(2.68rem, 7.56vw, 7.61rem), clamp(3.75rem, 7vw, 8.7rem));
     line-height: 0.85;
   }
 }
 
 @media (max-height: 780px) and (min-width: 1024px) {
   .hero-title {
-    font-size: clamp(3rem, 8.1vw, 8.3rem);
+    font-size: min(clamp(2.55rem, 6.89vw, 7.06rem), clamp(3.75rem, 7vw, 8.7rem));
   }
 }
 

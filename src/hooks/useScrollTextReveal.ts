@@ -39,12 +39,16 @@ export function useScrollTextReveal(
 
     ensureGsapRegistered();
 
+    const styles = window.getComputedStyle(element);
+    const ghostColor = styles.getPropertyValue("--color-text-ghost").trim();
+    const primaryColor = styles.getPropertyValue("--color-text-primary").trim();
+
     const context = gsap.context(() => {
       gsap.fromTo(
         words,
-        { color: "var(--color-text-ghost)" },
+        { color: ghostColor },
         {
-          color: "var(--color-text-primary)",
+          color: primaryColor,
           ease: "none",
           stagger: 0.18,
           scrollTrigger: {

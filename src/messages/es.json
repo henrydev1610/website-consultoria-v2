@@ -133,12 +133,6 @@
           "description": "Normalmente empezamos por los documentos personales, los formularios principales y los materiales de apoyo de tu proceso. La idea es evitar prisas y dejar todo estructurado desde el inicio."
         },
         {
-          "id": "translation",
-          "number": "03",
-          "title": "¿Cuánto tiempo puede tardar en quedar lista mi solicitud?",
-          "description": "El plazo depende del tipo de proceso y de la cantidad de documentos que ya tengas disponibles. Cuando revisamos tu caso, podemos darte una idea mucho más realista de lo que falta y del tiempo involucrado."
-        },
-        {
           "id": "checklist",
           "number": "04",
           "title": "¿También revisan todo antes del envío?",

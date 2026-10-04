@@ -71,7 +71,7 @@ export function International({
             <h2
               ref={titleRevealRef}
               data-reveal
-              className="w-full max-w-[11ch] text-[clamp(4.4rem,8.3vw,10.2rem)] font-[600] leading-[0.88] tracking-[-0.055em] text-black/18 md:max-w-[16ch] xl:max-w-[19ch]"
+              className="w-full max-w-[11ch] text-[clamp(3.75rem,7vw,8.7rem)] font-[600] leading-[0.88] tracking-[-0.055em] text-black/18 md:max-w-[16ch] xl:max-w-[19ch]"
               style={{ textWrap: "balance" }}
             >
               {titleWords.map((word, index) => (

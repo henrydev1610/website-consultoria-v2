@@ -66,12 +66,6 @@ const aboutParallaxItems = [
     mobile: { fromX: 0, toX: 0, fromY: 0, toY: 0 },
   },
   {
-    selector: '[data-about-float="approach-mid"]',
-    desktop: { fromX: 4, toX: -4, fromY: 18, toY: -15 },
-    tablet: { fromX: 3, toX: -3, fromY: 12, toY: -10 },
-    mobile: { fromX: 0, toX: 0, fromY: 0, toY: 0 },
-  },
-  {
     selector: '[data-about-float="approach-bottom"]',
     desktop: { fromX: -2, toX: 3, fromY: 11, toY: -9 },
     tablet: { fromX: -2, toX: 2, fromY: 8, toY: -6 },
@@ -425,7 +419,7 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
             <h2
               ref={aboutHeadlineRef}
               data-about-reveal
-              className="w-full max-w-[12ch] text-center text-[clamp(4.4rem,8.3vw,10.2rem)] font-[600] leading-[0.88] tracking-[-0.055em] text-black/18 md:max-w-[24ch] xl:max-w-[28ch]"
+              className="w-full max-w-[12ch] text-center text-[clamp(3.75rem,7vw,8.7rem)] font-[600] leading-[0.88] tracking-[-0.055em] text-black/18 md:max-w-[24ch] xl:max-w-[28ch]"
               style={{ textWrap: "balance" }}
             >
               {about.headlineLines.map((line) => (
@@ -478,18 +472,18 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
               className="absolute right-0 top-0 h-full w-px origin-top bg-black/10"
             />
 
-            <div className="space-y-5">
+            <div className="mx-auto flex w-fit max-w-full flex-col items-center gap-6 text-center md:gap-8">
               <Eyebrow className="text-black/48">{about.frameTitle}</Eyebrow>
               <p className="max-w-[26ch] text-[clamp(1.38rem,1.85vw,1.92rem)] font-[400] leading-[1.14] tracking-[-0.026em] text-black/82">
                 {about.body}
               </p>
-              <p className="max-w-[33ch] text-sm leading-relaxed text-black/56 md:text-[0.98rem]">
+              <p className="max-w-[33ch] text-center text-sm leading-relaxed text-black/56 md:text-[0.98rem]">
                 {about.secondary}
               </p>
               <SplitScrambleLink
                 href={aboutLink}
                 label={about.ctaLabel}
-                className="mt-3"
+                className="mx-auto"
               />
             </div>
           </div>
@@ -552,7 +546,7 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
         <div className="relative mt-18 space-y-14 md:mt-8 md:space-y-18 xl:mt-16 xl:space-y-24">
           <div
             ref={ghostRevealRef}
-            className="relative overflow-hidden border-y border-black/8 py-10 md:py-16 xl:py-20"
+            className="relative grid items-center gap-8 overflow-hidden border-y border-black/8 py-10 md:py-16 lg:grid-cols-[minmax(0,1fr)_auto] lg:pr-4 xl:gap-12 xl:py-20 xl:pr-6"
           >
             <span
               data-about-line-x
@@ -586,7 +580,7 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
             <figure
               data-about-reveal
               data-about-float="flight"
-              className="relative z-[1] ml-auto -mt-8 hidden w-[16rem] overflow-hidden md:block xl:-mt-12 xl:w-[19rem]"
+              className="relative z-[1] w-full max-w-[24rem] justify-self-center overflow-hidden lg:w-[24rem] lg:justify-self-end xl:w-[28rem] xl:max-w-[28rem]"
             >
               <div data-about-clip className="overflow-hidden">
                 <Image
@@ -594,7 +588,7 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
                   alt={messages.home.international.imageAlt}
                   width={aboutEditorialImages.flightDetail.width}
                   height={aboutEditorialImages.flightDetail.height}
-                  sizes="(max-width: 1279px) 30vw, 19rem"
+                  sizes="(max-width: 415px) calc(100vw - 32px), (max-width: 1279px) 384px, 448px"
                   className="aspect-[5/3.2] w-full object-cover"
                 />
               </div>
@@ -634,7 +628,7 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
               data-about-reveal
               data-about-float="approach-top"
               aria-hidden="true"
-              className="pointer-events-none absolute right-[6%] top-[8%] hidden overflow-hidden md:block md:w-[8.75rem] xl:right-[8%] xl:w-[10rem]"
+              className="pointer-events-none absolute right-[6%] top-[8%] hidden overflow-hidden md:block md:w-[8.75rem] lg:max-2xl:right-0 lg:max-xl:w-[7.5rem] xl:right-[8%] xl:w-[10rem] xl:max-2xl:right-0 xl:max-2xl:w-[9rem]"
             >
               <div data-about-clip className="overflow-hidden">
                 <Image
@@ -650,27 +644,9 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
 
             <figure
               data-about-reveal
-              data-about-float="approach-mid"
-              aria-hidden="true"
-              className="pointer-events-none absolute right-[18%] top-[42%] hidden overflow-hidden md:block md:w-[12.5rem] xl:right-[22%] xl:w-[15rem]"
-            >
-              <div data-about-clip className="overflow-hidden">
-                <Image
-                  src={aboutEditorialImages.corridorDetail.src}
-                  alt=""
-                  width={aboutEditorialImages.corridorDetail.width}
-                  height={aboutEditorialImages.corridorDetail.height}
-                  sizes="(max-width: 1279px) 22vw, 15rem"
-                  className="aspect-[5/3.8] w-full object-cover"
-                />
-              </div>
-            </figure>
-
-            <figure
-              data-about-reveal
               data-about-float="approach-bottom"
               aria-hidden="true"
-              className="pointer-events-none absolute bottom-[7%] right-[5%] hidden overflow-hidden md:block md:w-[7.5rem] xl:right-[10%] xl:w-[9rem]"
+              className="pointer-events-none absolute bottom-[7%] right-[5%] hidden overflow-hidden md:block md:w-[7.5rem] lg:max-2xl:right-0 xl:right-[10%] xl:w-[9rem] xl:max-2xl:right-0"
             >
               <div data-about-clip className="overflow-hidden">
                 <Image
@@ -692,7 +668,7 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
             >
               <h3
                 data-about-reveal
-                className="w-full max-w-[15.5ch] text-left text-[clamp(4.4rem,8.3vw,10.2rem)] font-[600] leading-[0.9] tracking-[-0.055em] text-black md:max-w-[14.5ch] xl:max-w-[16.4ch]"
+                className="mx-auto w-full max-w-[15.5ch] text-center text-[clamp(3.75rem,7vw,8.7rem)] font-[600] leading-[0.95] tracking-[-0.055em] text-black md:max-w-[14.5ch] xl:max-w-[16.4ch]"
                 style={{ textWrap: "balance" }}
               >
                 {serviceTitleWords.map((word, index) => (

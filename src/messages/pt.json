@@ -124,19 +124,13 @@
           "id": "preparation",
           "number": "01",
           "title": "Como funciona o processo de imigração na prática?",
-          "description": "De forma resumida, a gente organiza cada etapa com você: entende seu objetivo, revisa o que já existe, aponta o que falta e monta um caminho claro para a aplicação avançar com mais segurança."
+          "description": "Tudo começa com o seu objetivo. A partir dele, ajudamos você a organizar a documentação, identificar pendências e preparar a solicitação. Em cada etapa, explicamos o que precisa ser feito para que você saiba quais são os próximos passos."
         },
         {
           "id": "review",
           "number": "02",
           "title": "Quais documentos eu preciso organizar primeiro?",
           "description": "Normalmente começamos pelos documentos pessoais, formulários principais e materiais de apoio do seu processo. A ideia é evitar correria e deixar tudo estruturado logo no começo."
-        },
-        {
-          "id": "translation",
-          "number": "03",
-          "title": "Em quanto tempo minha aplicação pode ficar pronta?",
-          "description": "O prazo depende do tipo de processo e da quantidade de documentos já disponíveis. Quando analisamos seu caso, conseguimos te dar uma noção mais realista do que falta e do tempo envolvido."
         },
         {
           "id": "checklist",

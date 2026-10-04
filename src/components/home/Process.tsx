@@ -91,7 +91,7 @@ export function Process({ locale, title, ctaLabel, items }: ProcessProps) {
           <div className="col-span-4 mb-[8rem] mt-[5rem] md:col-span-8 xl:col-span-11">
             <h2
               ref={titleRevealRef}
-              className="w-full max-w-[12ch] text-center text-[clamp(4.4rem,8.3vw,10.2rem)] font-[600] leading-[0.88] tracking-[-0.055em] text-black/18 md:max-w-[24ch] xl:max-w-[28ch]"
+              className="w-full max-w-[12ch] text-center text-[clamp(3.75rem,7vw,8.7rem)] font-[600] leading-[0.88] tracking-[-0.055em] text-black/18 md:max-w-[24ch] xl:max-w-[28ch]"
               style={{ textWrap: "balance" }}
             >
               {titleWords.map((word, index) => (

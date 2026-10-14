@@ -232,7 +232,7 @@ export function ContactExperience({ messages }: ContactExperienceProps) {
                     {content.info.emailLabel}
                   </p>
                   <a
-                    href={`mailto:${siteConfig.email}`}
+                    href={siteConfig.ctaUrl}
                     className="footer-link mt-2 block w-fit text-lg"
                   >
                     <RevealWords text={siteConfig.email} />

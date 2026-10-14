@@ -70,7 +70,7 @@ export function Footer({ locale, messages }: FooterProps) {
               {messages.footer.contact}
             </p>
             <div className="space-y-3 text-sm text-white/82">
-              <Link href={`mailto:${siteConfig.email}`} className="footer-link block">
+              <Link href={siteConfig.ctaUrl} className="footer-link block">
                 {siteConfig.email}
               </Link>
               <Link href={`tel:${siteConfig.phone}`} className="footer-link block">

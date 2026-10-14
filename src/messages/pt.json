@@ -45,7 +45,13 @@
   "home": {
     "hero": {
       "eyebrow": "Preparação documental internacional",
-      "title": ["Seu próximo", "destino", "começa organizado"],
+      "title": [
+        "Excelência na",
+        "preparação de",
+        "documentos",
+        "imigratórios nos",
+        "Estados Unidos"
+      ],
       "description": "Preparamos e organizamos sua documentação para que processos de visto e imigração sejam mais claros, seguros e fáceis de conduzir.",
       "cta": "Iniciar meu processo",
       "imageAlt": "Viajantes caminhando por um grande terminal internacional"
@@ -66,18 +72,30 @@
       "eyebrow": "Quem somos",
       "ctaLabel": "Quem somos",
       "headlineLines": [
-        "Tornamos caminhos complexos",
-        "mais claros desde o primeiro passo."
+        "Atendimento personalizado e conexão com advogados de imigração independentes e licenciados nos EUA"
       ],
       "title": "Clareza, contexto e acompanhamento para transformar decisões importantes em um processo organizado.",
-      "body": "Imigração envolve documentos, decisões e momentos importantes. Nosso trabalho é organizar tudo isso com clareza, estratégia e acompanhamento próximo, para que você saiba exatamente onde está e qual é o próximo passo.",
-      "secondary": "Da preparação documental à revisão final, cada etapa é tratada com atenção e contexto. Nada de processos confusos ou respostas genéricas: construímos uma jornada organizada de acordo com a realidade de cada cliente.",
-      "backgroundLines": ["UM CAMINHO", "MAIS CLARO"],
+      "body": "Organização, precisão e atendimento personalizado em cada etapa.",
+      "secondary": [
+        "Somos uma empresa especializada em serviços administrativos de preparação de documentos imigratórios nos Estados Unidos.",
+        "Nosso compromisso é oferecer uma experiência organizada, transparente e eficiente para pessoas que precisam de assistência com formulários, organização de documentos e preparação de pacotes para apresentação às autoridades competentes.",
+        "Trabalhamos com atenção aos detalhes, comunicação clara e acompanhamento administrativo durante a preparação documental."
+      ],
+      "backgroundLines": ["Somos a sua", "solução imigratória"],
       "primaryImageAlt": "Retrato editorial de uma viajante em um espaço público contemporâneo",
       "secondaryImageAlt": "Corredor arquitetônico de aeroporto com sensação de deslocamento",
       "tertiaryImageAlt": "Documentos organizados sobre uma mesa de trabalho clara",
-      "frameTitle": "Nosso jeito de fazer",
-      "frameBody": "Organizamos cada etapa com contexto, ritmo e revisão cuidadosa para que sua jornada avance com mais clareza."
+      "frameTitle": "Sua documentação, nossa dedicação.",
+      "frameBody": "Organizamos cada etapa com contexto, ritmo e revisão cuidadosa para que sua jornada avance com mais clareza.",
+      "closingStatement": "Você cuida dos seus objetivos. Nós cuidamos da organização dos seus documentos."
+    },
+    "instagram": {
+      "eyebrow": "INSTAGRAM",
+      "title": "ACOMPANHE A ONIO",
+      "subtitle": "Informação e confiança para sua jornada imigratória.",
+      "description": "Conheça nossas publicações com orientações e informações para acompanhar cada etapa da sua jornada com mais clareza e confiança.",
+      "followLabel": "SEGUIR NO INSTAGRAM",
+      "openPostLabel": "Abrir publicação no Instagram"
     },
     "manifesto": {
       "eyebrow": "Nossa abordagem",

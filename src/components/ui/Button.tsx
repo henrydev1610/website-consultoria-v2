@@ -24,7 +24,7 @@ const variantClasses = {
   dark: "border-black bg-transparent text-black hover:bg-black hover:text-white",
   light: "border-white/32 bg-transparent text-white hover:border-white hover:bg-white hover:text-black",
   accent:
-    "border-[var(--color-primary)] bg-[var(--color-primary)] text-white hover:border-[var(--color-primary-hover)] hover:bg-[var(--color-primary-hover)] active:border-[var(--color-primary-active)] active:bg-[var(--color-primary-active)]",
+    "border-[var(--color-action)] bg-[var(--color-action)] text-[var(--color-text-primary)] hover:border-[var(--color-action-hover)] hover:bg-[var(--color-action-hover)] active:border-[var(--color-action-active)] active:bg-[var(--color-action-active)]",
 };
 
 interface ButtonInnerProps extends ButtonProps {
@@ -82,6 +82,7 @@ export function Button({
 }: ButtonProps) {
   const scrambleRef = useRef<ScrambleTextHandle | null>(null);
   const shouldTrackInteraction = Boolean(scrambleText);
+  const isActionAccent = props.variant === "accent";
 
   function handleInteractionStart() {
     if (!shouldTrackInteraction) {
@@ -103,7 +104,7 @@ export function Button({
     return (
       <Link
         href={href}
-        className={cn("inline-flex", wrapperClassName)}
+        className={cn("inline-flex", wrapperClassName, isActionAccent && "action-button")}
         onClick={onClick}
         onMouseEnter={handleInteractionStart}
         onMouseLeave={handleInteractionEnd}
@@ -123,7 +124,7 @@ export function Button({
     <button
       type="button"
       onClick={onClick}
-      className={cn("inline-flex", wrapperClassName)}
+      className={cn("inline-flex", wrapperClassName, isActionAccent && "action-button")}
       onMouseEnter={handleInteractionStart}
       onMouseLeave={handleInteractionEnd}
       onFocus={handleInteractionStart}

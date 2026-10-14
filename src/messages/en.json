@@ -45,7 +45,12 @@
   "home": {
     "hero": {
       "eyebrow": "International document preparation",
-      "title": ["Your next", "destination", "starts organized"],
+      "title": [
+        "Excellence in",
+        "the preparation of",
+        "immigration documents",
+        "in the United States"
+      ],
       "description": "We prepare and organize your documentation so visa and immigration processes feel clearer, safer, and easier to manage.",
       "cta": "Start my process",
       "imageAlt": "Travelers walking through a large international terminal"
@@ -66,18 +71,30 @@
       "eyebrow": "Who we are",
       "ctaLabel": "Who we are",
       "headlineLines": [
-        "We make complex paths",
-        "clearer from the very first step."
+        "Personalized service and connection with independent, licensed immigration attorneys in the United States"
       ],
       "title": "Clarity, context, and close support for turning important decisions into an organized process.",
-      "body": "Immigration involves documents, decisions, and important moments. Our role is to organize all of it with clarity, strategy, and close guidance, so you always know where you are and what comes next.",
-      "secondary": "From document preparation to final review, every stage is handled with attention and context. No confusing process and no generic answers: we build an organized journey around the reality of each client.",
-      "backgroundLines": ["A CLEARER", "WAY FORWARD"],
+      "body": "Organization, precision, and personalized service at every step.",
+      "secondary": [
+        "We are a company specializing in administrative services for preparing immigration documents in the United States.",
+        "Our commitment is to provide an organized, transparent, and efficient experience for people who need assistance with forms, document organization, and preparing packages for submission to the relevant authorities.",
+        "We work with attention to detail, clear communication, and administrative support throughout document preparation."
+      ],
+      "backgroundLines": ["WE ARE YOUR", "IMMIGRATION SOLUTION"],
       "primaryImageAlt": "Editorial portrait of a traveler in a contemporary public space",
       "secondaryImageAlt": "Architectural airport corridor with directional movement",
       "tertiaryImageAlt": "Organized immigration paperwork on a clean desk",
-      "frameTitle": "Our way of working",
-      "frameBody": "We organize each stage with context, rhythm, and careful review so your journey can move forward with more clarity."
+      "frameTitle": "Your documentation, our dedication.",
+      "frameBody": "We organize each stage with context, rhythm, and careful review so your journey can move forward with more clarity.",
+      "closingStatement": "You focus on your goals. We take care of organizing your documents."
+    },
+    "instagram": {
+      "eyebrow": "INSTAGRAM",
+      "title": "FOLLOW ONIO",
+      "subtitle": "Information and confidence for your immigration journey.",
+      "description": "Explore our posts for guidance and information to help you follow each step of your journey with greater clarity and confidence.",
+      "followLabel": "FOLLOW ON INSTAGRAM",
+      "openPostLabel": "Open post on Instagram"
     },
     "manifesto": {
       "eyebrow": "Our approach",

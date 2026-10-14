@@ -8,7 +8,7 @@ export const siteConfig: SiteConfig = {
   phone: "+1 (305) 555-0146",
   whatsapp: "+13055550146",
   ctaUrl: "mailto:hello@northlinedossier.com?subject=Start%20My%20Process",
-  siteUrl: "https://www.northlinedossier.com",
+  siteUrl: "https://onioglobalsolutions.com",
   defaultLocale: "en",
   supportedLocales: ["pt", "en", "es"],
   socials: {

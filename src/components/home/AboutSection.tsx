@@ -15,6 +15,7 @@ import { Container } from "../layout/Container";
 import { Crosshair } from "../ui/Crosshair";
 import { Eyebrow } from "../ui/Eyebrow";
 import { SplitScrambleLink } from "../ui/SplitScrambleLink";
+import { InstagramSection } from "./InstagramSection";
 
 interface AboutSectionProps {
   locale: Locale;
@@ -28,36 +29,67 @@ const cardImageById = {
   checklist: aboutEditorialImages.checklistCard,
 } as const;
 
+const aboutGalleryImages = [
+  {
+    position: "mid-left",
+    src: "/foto-1-site.jpeg",
+    width: 638,
+    height: 480,
+    positionClass: "md:left-[6%] md:top-[38%]",
+  },
+  {
+    position: "mid-right",
+    src: "/foto-2-site.jpeg",
+    width: 689,
+    height: 445,
+    positionClass: "md:right-[6%] md:top-[38%]",
+  },
+  {
+    position: "bottom-left",
+    src: "/foto-3-site.jpg",
+    width: 2560,
+    height: 1696,
+    positionClass: "md:left-[6%] md:top-[67%]",
+  },
+  {
+    position: "bottom-right",
+    src: "/foto-4-site.webp",
+    width: 800,
+    height: 534,
+    positionClass: "md:right-[6%] md:top-[67%]",
+  },
+] as const;
+
 const aboutParallaxItems = [
   {
     selector: '[data-about-float="top-right"]',
-    desktop: { fromX: 5, toX: -4, fromY: -10, toY: 16 },
-    tablet: { fromX: 4, toX: -3, fromY: -7, toY: 11 },
-    mobile: { fromX: 2, toX: -2, fromY: -4, toY: 6 },
+    desktop: { fromX: 5, toX: -4, fromY: 0, toY: 0 },
+    tablet: { fromX: 4, toX: -3, fromY: 0, toY: 0 },
+    mobile: { fromX: 2, toX: -2, fromY: 0, toY: 0 },
   },
   {
     selector: '[data-about-float="mid-left"]',
-    desktop: { fromX: -4, toX: 3, fromY: 12, toY: -18 },
-    tablet: { fromX: -3, toX: 2, fromY: 9, toY: -13 },
-    mobile: { fromX: -1.5, toX: 1.5, fromY: 5, toY: -6 },
+    desktop: { fromX: -1, toX: 1, fromY: 0, toY: 0 },
+    tablet: { fromX: -0.5, toX: 0.5, fromY: 0, toY: 0 },
+    mobile: { fromX: 0, toX: 0, fromY: 0, toY: 0 },
   },
   {
     selector: '[data-about-float="mid-right"]',
-    desktop: { fromX: 4, toX: -3, fromY: 16, toY: -12 },
-    tablet: { fromX: 3, toX: -2, fromY: 11, toY: -9 },
-    mobile: { fromX: 1.5, toX: -1.5, fromY: 5, toY: -5 },
+    desktop: { fromX: 1, toX: -1, fromY: 0, toY: 0 },
+    tablet: { fromX: 0.5, toX: -0.5, fromY: 0, toY: 0 },
+    mobile: { fromX: 0, toX: 0, fromY: 0, toY: 0 },
   },
   {
     selector: '[data-about-float="bottom-left"]',
-    desktop: { fromX: -5, toX: 4, fromY: 24, toY: -20 },
-    tablet: { fromX: -4, toX: 3, fromY: 16, toY: -14 },
-    mobile: { fromX: -2, toX: 2, fromY: 7, toY: -7 },
+    desktop: { fromX: -1, toX: 1, fromY: 0, toY: 0 },
+    tablet: { fromX: -0.5, toX: 0.5, fromY: 0, toY: 0 },
+    mobile: { fromX: 0, toX: 0, fromY: 0, toY: 0 },
   },
   {
     selector: '[data-about-float="bottom-right"]',
-    desktop: { fromX: 5, toX: -4, fromY: 20, toY: -16 },
-    tablet: { fromX: 4, toX: -3, fromY: 14, toY: -11 },
-    mobile: { fromX: 2, toX: -2, fromY: 6, toY: -6 },
+    desktop: { fromX: 1, toX: -1, fromY: 0, toY: 0 },
+    tablet: { fromX: 0.5, toX: -0.5, fromY: 0, toY: 0 },
+    mobile: { fromX: 0, toX: 0, fromY: 0, toY: 0 },
   },
   {
     selector: '[data-about-float="approach-top"]',
@@ -397,29 +429,28 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
           <Crosshair className="right-[19%] top-[56%] hidden xl:block" />
           <Crosshair className="right-[6%] top-[86%] hidden xl:block" />
 
-          <figure
-            data-about-reveal
-            data-about-float="top-right"
-            aria-hidden="true"
-            className="relative order-1 ml-auto w-[42vw] max-w-[11rem] overflow-hidden md:absolute md:right-[9%] md:top-[7%] md:w-[11rem] md:z-0 xl:right-[11%] xl:w-[13rem]"
-          >
-            <div data-about-clip className="overflow-hidden">
-              <Image
-                src={aboutEditorialImages.topPortrait.src}
-                alt=""
-                width={aboutEditorialImages.topPortrait.width}
-                height={aboutEditorialImages.topPortrait.height}
-                sizes="(max-width: 767px) 44vw, 12rem"
-                className="aspect-[4/5] w-full object-cover"
-              />
-            </div>
-          </figure>
-
-          <div className="order-3 relative z-[2] mx-auto flex w-full max-w-[52rem] flex-col items-center text-center md:w-[min(76vw,58rem)] md:pt-[8.5rem] xl:w-[min(72vw,66rem)] xl:pt-[8rem]">
+          <div className="order-1 mx-auto grid w-full grid-cols-1 items-center gap-7 md:w-[min(74vw,70rem)] md:grid-cols-[minmax(0,1fr)_13rem] md:gap-8 md:pt-[8.5rem] xl:grid-cols-[minmax(0,1fr)_15rem] xl:pt-[8rem]">
+            <figure
+              data-about-reveal
+              data-about-float="top-right"
+              aria-hidden="true"
+              className="relative order-1 mx-auto w-[min(55vw,12rem)] justify-self-center overflow-hidden border border-black/10 md:order-2 md:ml-0 md:w-full md:justify-self-end"
+            >
+              <div data-about-clip className="overflow-hidden">
+                <Image
+                  src="/adriano-processo.png"
+                  alt=""
+                  width={1045}
+                  height={1506}
+                  sizes="(max-width: 349px) 55vw, (max-width: 767px) 12rem, (max-width: 1279px) 13rem, 15rem"
+                  className="h-auto w-full object-contain"
+                />
+              </div>
+            </figure>
             <h2
               ref={aboutHeadlineRef}
               data-about-reveal
-              className="w-full max-w-[12ch] text-center text-[clamp(3.75rem,7vw,8.7rem)] font-[600] leading-[0.88] tracking-[-0.055em] text-black/18 md:max-w-[24ch] xl:max-w-[28ch]"
+              className="order-2 w-full max-w-[24ch] text-center text-[clamp(1.5rem,3.4vw,3.25rem)] font-[500] leading-[1.18] tracking-[-0.025em] text-black/18 md:order-1 md:justify-self-start md:text-left"
               style={{ textWrap: "balance" }}
             >
               {about.headlineLines.map((line) => (
@@ -437,23 +468,28 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
             </h2>
           </div>
 
-          <figure
-            data-about-reveal
-            data-about-float="mid-left"
-            aria-hidden="true"
-            className="relative order-4 hidden overflow-hidden md:absolute md:left-[8%] md:top-[45%] md:block md:w-[10rem] md:z-0 xl:left-[10%] xl:w-[11.5rem]"
-          >
-            <div data-about-clip className="overflow-hidden">
-              <Image
-                src={aboutEditorialImages.reviewCard.src}
-                alt=""
-                width={aboutEditorialImages.reviewCard.width}
-                height={aboutEditorialImages.reviewCard.height}
-                sizes="(max-width: 1279px) 16vw, 11.5rem"
-                className="aspect-square w-full object-cover"
-              />
-            </div>
-          </figure>
+          <div className="order-4 grid grid-cols-2 gap-3 md:contents">
+            {aboutGalleryImages.map((image) => (
+              <figure
+                key={image.position}
+                data-about-reveal
+                data-about-float={image.position}
+                aria-hidden="true"
+                className={`relative aspect-[7/5] w-full overflow-hidden rounded-sm border border-black/10 bg-white md:absolute md:z-[1] md:w-40 xl:w-56 ${image.positionClass}`}
+              >
+                <div data-about-clip className="h-full overflow-hidden">
+                  <Image
+                    src={image.src}
+                    alt=""
+                    width={image.width}
+                    height={image.height}
+                    sizes="(max-width: 767px) 45vw, (max-width: 1279px) 10rem, 14rem"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              </figure>
+            ))}
+          </div>
 
           <div
             data-about-reveal
@@ -472,13 +508,24 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
               className="absolute right-0 top-0 h-full w-px origin-top bg-black/10"
             />
 
-            <div className="mx-auto flex w-fit max-w-full flex-col items-center gap-6 text-center md:gap-8">
-              <Eyebrow className="text-black/48">{about.frameTitle}</Eyebrow>
-              <p className="max-w-[26ch] text-[clamp(1.38rem,1.85vw,1.92rem)] font-[400] leading-[1.14] tracking-[-0.026em] text-black/82">
-                {about.body}
-              </p>
-              <p className="max-w-[33ch] text-center text-sm leading-relaxed text-black/56 md:text-[0.98rem]">
-                {about.secondary}
+            <div className="mx-auto flex w-full max-w-[42ch] flex-col items-center gap-6 text-center md:gap-8">
+              <div className="max-w-[36ch] space-y-3">
+                <h3 className="text-[clamp(1.5rem,2.2vw,2rem)] font-[500] leading-[1.08] tracking-[-0.025em] text-black">
+                  {about.frameTitle}
+                </h3>
+                <p className="text-base leading-relaxed text-black/72 md:text-lg">
+                  {about.body}
+                </p>
+              </div>
+              <div className="w-full max-w-[44ch] space-y-4 text-left text-sm leading-[1.65] text-black/68 md:text-base">
+                {about.secondary.map((paragraph, paragraphIndex) => (
+                  <p key={`institutional-paragraph-${paragraphIndex}`}>
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+              <p className="max-w-[36ch] border-t border-black/10 pt-5 text-base font-medium leading-relaxed text-black/82 md:text-lg">
+                {about.closingStatement}
               </p>
               <SplitScrambleLink
                 href={aboutLink}
@@ -488,60 +535,9 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
             </div>
           </div>
 
-          <figure
-            data-about-reveal
-            data-about-float="mid-right"
-            aria-hidden="true"
-            className="relative order-5 ml-auto  w-[54vw] max-w-[13rem] overflow-hidden md:absolute md:right-[9%] md:top-[37%] md:w-[11rem] md:z-0 xl:right-[11%] xl:top-[36%] xl:w-[12.5rem]"
-          >
-            <div data-about-clip className="overflow-hidden">
-              <Image
-                src={aboutEditorialImages.documentDetail.src}
-                alt=""
-                width={aboutEditorialImages.documentDetail.width}
-                height={aboutEditorialImages.documentDetail.height}
-                sizes="(max-width: 767px) 54vw, (max-width: 1279px) 18vw, 12.5rem"
-                className="aspect-[4/5] w-full object-cover"
-              />
-            </div>
-          </figure>
-
-          <figure
-            data-about-reveal
-            data-about-float="bottom-left"
-            aria-hidden="true"
-            className="relative order-7 hidden overflow-hidden md:absolute md:left-[7%] md:top-[73%] md:block md:w-[13rem] md:z-0 xl:left-[9%] xl:w-[15rem]"
-          >
-            <div data-about-clip className="overflow-hidden">
-              <Image
-                src={aboutEditorialImages.leftFeature.src}
-                alt=""
-                width={aboutEditorialImages.leftFeature.width}
-                height={aboutEditorialImages.leftFeature.height}
-                sizes="(max-width: 1279px) 20vw, 15rem"
-                className="aspect-[4/5] w-full object-cover"
-              />
-            </div>
-          </figure>
-
-          <figure
-            data-about-reveal
-            data-about-float="bottom-right"
-            aria-hidden="true"
-            className="relative order-8 ml-auto w-[62vw] max-w-[16rem] overflow-hidden md:absolute md:right-[6%] md:top-[72%] md:w-[14rem] md:z-0 xl:right-[7%] xl:top-[71%] xl:w-[17rem]"
-          >
-            <div data-about-clip className="overflow-hidden">
-              <Image
-                src={aboutEditorialImages.checklistCard.src}
-                alt=""
-                width={aboutEditorialImages.checklistCard.width}
-                height={aboutEditorialImages.checklistCard.height}
-                sizes="(max-width: 767px) 62vw, (max-width: 1279px) 21vw, 17rem"
-                className="aspect-[5/3.7] w-full object-cover"
-              />
-            </div>
-          </figure>
         </div>
+
+        <InstagramSection content={messages.home.instagram} />
 
         <div className="relative mt-18 space-y-14 md:mt-8 md:space-y-18 xl:mt-16 xl:space-y-24">
           <div
@@ -561,7 +557,7 @@ export function AboutSection({ locale, messages }: AboutSectionProps) {
 
             <p
               data-about-ghost
-              className="pointer-events-none about-ghost-heading relative z-0 max-w-[10ch] text-[rgba(17,17,17,0.1)]"
+              className="pointer-events-none about-ghost-heading relative z-0 max-w-[11ch] text-[rgba(17,17,17,0.1)]"
             >
               {about.backgroundLines.map((line) => (
                 <span key={line} className="block">
